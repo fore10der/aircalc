@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'webpack_loader',
     'rest_framework',
     'api',
-    'base'
+    'base',
+    'aircarts',
+    'companies',
+    'actions',
 ]
 
 MIDDLEWARE = [
