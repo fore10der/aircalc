@@ -7,9 +7,8 @@ verify_ssl = true
 
 [packages]
 django = "*"
-djangorestframework = "*"
-psycopg2-binary = "*"
 django-webpack-loader = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.7"
