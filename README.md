@@ -2,6 +2,7 @@
 ### Requiments
  * Python 3.6.5
  * npm
+ * pipenv
 ### Install
  * `pipenv i` to install backend dependencies
  * `cd static && npm i` to install frontend dependencies
