@@ -7,7 +7,7 @@ from companies.models import Company
 def is_saved(record):
     print(Company.objects.filter(name=record['company']))
 
-def preprocess_xlsx(file):
+def preprocess_xlsx_v2(file):
     wb = load_workbook(filename=file)
 
     sheet = wb.active
