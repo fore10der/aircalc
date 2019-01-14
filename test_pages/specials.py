@@ -7,45 +7,35 @@ from companies.models import Company
 def is_saved(record):
     print(Company.objects.filter(name=record['company']))
 
-def preprocess_xlsx(file):
-    wb = load_workbook(filename=file)
-
-    sheet = wb.active
-
-    main = {}
-
+def preprocess_xlsx(filename):
+    result = {}
+    # TODO review this structure (what is the purpose)
     ll = {'FH': ['name', 'company', 'statistic'],
         'Removals': ['name', 'company', 'statistic'],
         'Failures': ['name', 'company', 'statistic'],
         'Induced': ['name', 'company', 'statistic']}
-    for key in wb.get_sheet_names():
-        main_dict = []
-        for i in range(wb.get_sheet_by_name(key).min_row + 1, wb.get_sheet_by_name(key).max_row):
-            buff_dict = {}
-            stat_dict = []
-            for j in range(wb.get_sheet_by_name(key).min_column + 2, wb.get_sheet_by_name(key).max_column):
-                stat_dict.append({'date':wb.get_sheet_by_name(key).cell(row=wb.get_sheet_by_name(key).min_row, column=j).value,
-                                'count':wb.get_sheet_by_name(key).cell(row=i, column=j).value})
-            buff_dict[ll[key][0]] = wb.get_sheet_by_name(key).cell(row=i, column=1).value
-            buff_dict[ll[key][1]] = wb.get_sheet_by_name(key).cell(row=i, column=2).value
-            buff_dict[ll[key][2]] = stat_dict
-            main_dict.append(buff_dict)
-            main[key] = main_dict
-    
-    return main
-
-# def fill_db(data):
-#     for key, actions in data.items():
-#         if (key == 'FH'):
-#             fill_actions(actions,FH)
-#         elif (key == 'Removals'):
-#             fill_actions(actions,Removal)
-#         elif (key == 'Failures'):
-#             fill_actions(actions,Failture)
-#         elif (key == 'Induced'):
-#             fill_actions(actions,Included)
-# def fill_actions(actions, DB):
-#     for action in actions:
-#         if (is_saved(action)):
-#             Aircart.save(name=action['name'],company=action['company'])
-
+    wb = load_workbook(filename=filename, read_only=True)
+    for sheet in wb:
+        title = sheet.title
+        sheet_data = []
+        min_row = sheet.min_row
+        max_row = sheet.max_row
+        min_column = sheet.min_column
+        max_column = sheet.max_column
+        # TODO rewiew ranges below
+        for i in range(min_row + 1, max_row):
+            # TODO review variable naming
+            stat = []
+            for j in range(min_column + 2, max_column):
+                stat.append({
+                        'date' : sheet.cell(row=min_row, column=j).value,
+                        'count' : sheet.cell(row=i, column=j).value,
+                })
+            keys = ll[title]
+            sheet_data.append({
+                keys[0] : sheet.cell(row=i, column=1).value,
+                keys[1] : sheet.cell(row=i, column=2).value,
+                keys[2] : stat,
+            })
+        result[title] = sheet_data
+    return result
