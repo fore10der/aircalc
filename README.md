@@ -11,6 +11,5 @@
 #### Frontend
  * `npm start` from `static/` to run webpack-devserver*
 #### Backend
- * 
  * `pipenv shell`
  * `python manage.py runserver`
