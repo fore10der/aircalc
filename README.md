@@ -9,7 +9,7 @@
  * `pipenv shell && python manage.py makemigrations && python manage.py migrate` to generate db files
 ### Run
 #### Frontend
- * `npm start` from `static/` to run webpack-devserver*
+ * `npm start` from `static/` to run webpack-devserver
 #### Backend
  * `pipenv shell`
  * `python manage.py runserver`
