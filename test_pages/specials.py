@@ -1,11 +1,63 @@
 from openpyxl import load_workbook
 from datetime import date, datetime
-from actions.models import FH, Failture, Removal, Included
-from aircarts.models import Aircart
-from companies.models import Company
+from django.http import HttpResponse
+from django.shortcuts import render
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.dates import date2num, num2date
+import io
+import base64
+from xhtml2pdf import pisa
+from django.template.loader import get_template
 
-def is_saved(record):
-    print(Company.objects.filter(name=record['company']))
+def build_bars(data):
+    context = []
+    for table_key, table_values in data.items():
+        for item_values in table_values:
+            ax = plt.subplot(111)
+            ax.bar(num2date(item_values['statistic'][:,0]), item_values['statistic'][:,1], width=30)
+            ax.xaxis_date()
+            plt.title(item_values["name"])
+            buf = io.BytesIO()
+            plt.savefig(buf, format='png', dpi=300)
+            image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+            context.append(image_base64)
+            buf.close()
+            print(context)
+        break
+    return context
+
+def build_pdf(true_context):
+    template_path = 'pdf.html'
+    context = true_context
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisaStatus = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    print(pisaStatus.err)
+    if pisaStatus.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+    
+
+def draw():
+    fig = plt.figure()
+    plt.plot([1, 2])
+    plt.title("test")
+    #Читаем буффер
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png', dpi=300)
+    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
+    context = { "image": image_base64}
+    buf.close()
+    #Заканчиваем читать буффер
+    return context
 
 def preprocess_xlsx(file):
     wb = load_workbook(filename=file)
@@ -20,32 +72,19 @@ def preprocess_xlsx(file):
         'Induced': ['name', 'company', 'statistic']}
     for key in wb.get_sheet_names():
         main_dict = []
-        for i in range(wb.get_sheet_by_name(key).min_row + 1, wb.get_sheet_by_name(key).max_row):
+        for i in np.arange(wb.get_sheet_by_name(key).min_row + 1, wb.get_sheet_by_name(key).max_row):
             buff_dict = {}
-            stat_dict = []
-            for j in range(wb.get_sheet_by_name(key).min_column + 2, wb.get_sheet_by_name(key).max_column):
-                stat_dict.append({'date':wb.get_sheet_by_name(key).cell(row=wb.get_sheet_by_name(key).min_row, column=j).value,
-                                'count':wb.get_sheet_by_name(key).cell(row=i, column=j).value})
+            stat_dict = np.matrix([[date2num(wb.get_sheet_by_name(key).cell(row=wb.get_sheet_by_name(key).min_row, column=j).value),
+                                    wb.get_sheet_by_name(key).cell(row=i, column=j).value if wb.get_sheet_by_name(key).cell(row=i, column=j).value != None else 0
+                                    ] for j in np.arange(wb.get_sheet_by_name(key).min_column + 2, wb.get_sheet_by_name(key).max_column)])
+            # stat_dict = []
+            # for j in range(wb.get_sheet_by_name(key).min_column + 2, wb.get_sheet_by_name(key).max_column):
+            #     stat_dict.append(np.array([wb.get_sheet_by_name(key).cell(row=wb.get_sheet_by_name(key).min_row, column=j).value,
+            #                       wb.get_sheet_by_name(key).cell(row=i, column=j).value if wb.get_sheet_by_name(key).cell(row=i, column=j).value != None else 0]))
             buff_dict[ll[key][0]] = wb.get_sheet_by_name(key).cell(row=i, column=1).value
             buff_dict[ll[key][1]] = wb.get_sheet_by_name(key).cell(row=i, column=2).value
-            buff_dict[ll[key][2]] = stat_dict
+            buff_dict[ll[key][2]] = np.array(stat_dict)
             main_dict.append(buff_dict)
             main[key] = main_dict
     
     return main
-
-# def fill_db(data):
-#     for key, actions in data.items():
-#         if (key == 'FH'):
-#             fill_actions(actions,FH)
-#         elif (key == 'Removals'):
-#             fill_actions(actions,Removal)
-#         elif (key == 'Failures'):
-#             fill_actions(actions,Failture)
-#         elif (key == 'Induced'):
-#             fill_actions(actions,Included)
-# def fill_actions(actions, DB):
-#     for action in actions:
-#         if (is_saved(action)):
-#             Aircart.save(name=action['name'],company=action['company'])
-
