@@ -47,7 +47,12 @@ def build_pdf(true_context):
     return response
 
 def preprocess_xlsx(filename):
-    result = {}
+
+    wb = load_workbook(filename=filename)
+
+    sheet = wb.active
+
+    main = {}
     # TODO review this structure (what is the purpose)
     ll = {'FH': ['name', 'company', 'statistic'],
         'Removals': ['name', 'company', 'statistic'],
