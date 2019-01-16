@@ -19,11 +19,12 @@ def build_bars(data):
             ax.xaxis_date()
             plt.title(item_values["name"])
             buf = io.BytesIO()
-            plt.savefig(buf, format='png', dpi=300)
+            plt.savefig(buf, format='png', dpi=100)
             image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
             context.append(image_base64)
             buf.close()
             print(context)
+            break
         break
     return context
 
@@ -44,20 +45,6 @@ def build_pdf(true_context):
     if pisaStatus.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
-    
-
-def draw():
-    fig = plt.figure()
-    plt.plot([1, 2])
-    plt.title("test")
-    #Читаем буффер
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=300)
-    image_base64 = base64.b64encode(buf.getvalue()).decode('utf-8').replace('\n', '')
-    context = { "image": image_base64}
-    buf.close()
-    #Заканчиваем читать буффер
-    return context
 
 def preprocess_xlsx(file):
     wb = load_workbook(filename=file)
