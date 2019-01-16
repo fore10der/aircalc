@@ -12,6 +12,7 @@ openpyxl = "*"
 xhtml2pdf = "*"
 matplotlib = "*"
 numpy = "*"
+gunicorn = "==19.9.0"
 
 [requires]
 python_version = "3.7"
