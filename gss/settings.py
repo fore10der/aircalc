@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'base',
     'aircarts',
     'units',
+    'test_pages'
 ]
 
 MIDDLEWARE = [

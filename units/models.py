@@ -13,14 +13,17 @@ class UnitCreator(models.Model):
 
 class Unit(models.Model):
     unit_number = models.CharField(max_length=16)
-    manufacturer = models.ForeignKey(UnitCreator, on_delete=models.CASCADE)
+    manufacturer_id = models.ForeignKey(UnitCreator, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = (("unit_number", "manufacturer_id"),)
 
     def __str__(self):
         return self.unit_number
 
 class UnitAction(models.Model):
-    date = models.DateField(auto_now=True)
-    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    date = models.DateField()
+    unit_id = models.ForeignKey(Unit, on_delete=models.CASCADE)
     action_type = models.CharField(max_length=1, choices=ACTION_TYPES)
 
     def __str__(self):
