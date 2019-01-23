@@ -1,19 +1,25 @@
-from openpyxl import load_workbook
-from datetime import date, datetime
-from django.http import HttpResponse
-from django.shortcuts import render
 import numpy as np
+
 import matplotlib.pyplot as plt
 from matplotlib.dates import date2num, num2date
+
+from openpyxl import load_workbook
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.template.loader import get_template
+
 import io
 import base64
 from xhtml2pdf import pisa
-from django.template.loader import get_template
+
 from units.models import Unit, UnitCreator, UnitAction
 from aircarts.models import Plane, PlaneCompany, PlaneFlightHours
 from django.db.models import F, Sum
+
 import datetime
 from dateutil.rrule import rrule, MONTHLY
+from dateutil.relativedelta import relativedelta
 
 def is_source_exist(source, Model):
     return Model.objects.filter(source=source).exists()
@@ -109,16 +115,17 @@ def store_to_db(data):
                     for _ in np.arange(event[1]):
                         UnitAction.objects.create(unit_id=obj[0], date=num2date(event[0]), action_type=mark)
 
-def draw_plot():#start_date=0,end_date=0,unit_id = 1):
-    start_date = datetime.date(2017,1,1)
-    end_date = datetime.date(2018,12,1)
-    unit_id = 1
+def draw_plot(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), unit_id = 1, window_value = 3):
+    eps = (window_value - 1)//2 if window_value % 2 else window_value // 2
+    mouth_eps = relativedelta(months=eps)
     dates = list(rrule(MONTHLY, dtstart=start_date, until=end_date))
-    print(str(dates[1].date()))
-    X_count = len(dates) - 1
-    hours = removals = induced = np.zeros(X_count)
+    X_count = len(dates)
+    total_removals = UnitAction.objects.filter(unit_id=unit_id, date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=0)
+    total_induced = UnitAction.objects.filter(unit_id=unit_id, date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=1)
+    removals = np.zeros(X_count)
+    induced = np.zeros(X_count)
     for i in np.arange(X_count):
-        hours[i] = PlaneFlightHours.objects.filter(date__range=(dates[i].date(),dates[i+1].date()))
-        removals[i] = UnitAction.objects.filter(unit_id=unit_id, date__range=[str(dates[i].date()),str(dates[i+1].date())], action_type=0).count()
-        induced[i] = UnitAction.objects.filter(unit_id=unit_id, date__range=[str(dates[i].date()),str(dates[i+1].date())], action_type=1).count()
-    print(hours)
+        removals[i] = total_removals.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=0).count()
+        induced[i] = total_induced.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=1).count()
+    print(removals)
+    print(induced)
