@@ -9,6 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+test_pages/
 develop-eggs/
 dist/
 downloads/
@@ -119,5 +120,3 @@ dmypy.json
 
 #Pipfie
 *.lock
-
-test_pages/
