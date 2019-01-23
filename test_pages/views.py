@@ -1,6 +1,6 @@
 from django.views.generic.edit import FormView
 from .forms import TestFileForm
-from .specials import preprocess_xlsx, build_bars, build_pdf, store_to_db
+from .utils import preprocess_xlsx, build_bars, build_pdf, store_to_db, draw_plot
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -17,3 +17,7 @@ class TestFileView(FormView):
         # true_context = {"images": bar_images}
         # #return render(self.request,'pdf.html',true_context)
         # return build_pdf(true_context)
+
+def current_datetime(request):
+    draw_plot()
+    return HttpResponse('lmao')
