@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'webpack_loader',
-    'base',
-    'aircarts',
+    'loader',
     'units',
-    'test_pages'
+    'aircarts'
 ]
 
 MIDDLEWARE = [
