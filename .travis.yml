@@ -3,5 +3,10 @@ python:
   - '3.7-dev'
 install:
   - 'pip install pipenv'
-  - 'pipenv sync'
-script: 'python -m pytest --cov=pyblizzard tests --cov-report=xml'
+  - 'pipenv install'
+before_script:
+  - 'pipenv shell'
+  - './manage.py makemigrations'
+  - './manage.py migrate'
+script:
+  - './manage.py test'
