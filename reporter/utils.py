@@ -11,9 +11,6 @@ import datetime
 from dateutil.rrule import rrule, MONTHLY
 from dateutil.relativedelta import relativedelta
 
-
-
-
 def draw_plot(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), unit_id = 1, window_value = 3):
     eps = (window_value - 1)//2 if window_value % 2 else window_value // 2
     mouth_eps = relativedelta(months=eps)
