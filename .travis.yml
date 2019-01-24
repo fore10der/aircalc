@@ -6,7 +6,7 @@ install:
   - 'pipenv lock'
   - 'pipenv sync'
 before_script:
-  - './manage.py makemigrations'
-  - './manage.py migrate'
+  - 'python manage.py makemigrations'
+  - 'python manage.py migrate'
 script:
-  - './manage.py test'
+  - 'python manage.py test'
