@@ -1,8 +1,9 @@
 import numpy as np
-from matplotlib.dates import date2num
+from matplotlib.dates import date2num, num2date
 from openpyxl import load_workbook
 from units.models import Unit, UnitCreator, UnitAction
 from aircarts.models import Plane, PlaneCompany, PlaneFlightHours
+from django.db.models import F, Sum
 
 
 def is_source_exist(source, Model):

@@ -13,7 +13,7 @@ xhtml2pdf = "*"
 matplotlib = "*"
 numpy = "*"
 gunicorn = "==19.9.0"
-dateutil = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"
