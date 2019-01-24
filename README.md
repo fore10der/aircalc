@@ -1,6 +1,6 @@
 # aircalc
 ### Requiments
- * Python 3.6.5
+ * Python 3.7
  * npm
  * pipenv
 ### Install
