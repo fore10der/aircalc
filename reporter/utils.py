@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import num2date
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.db.models import F, Sum
 import io
 import base64
 from units.models import UnitAction
