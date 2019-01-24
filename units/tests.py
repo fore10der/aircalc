@@ -1,6 +1,6 @@
 from django.test import TestCase
 from .models import Unit, UnitCreator
-from test_pages.specials import is_name_exist, is_source_exist
+from loader.utils import is_name_exist, is_source_exist
 
 class ModelExistTest(TestCase):
     def setUp(self):
