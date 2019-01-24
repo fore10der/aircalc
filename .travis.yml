@@ -3,7 +3,7 @@ python:
   - '3.7-dev'
 install:
   - 'pip install pipenv'
-  - 'pipenv install'
+  - 'pipenv sync'
 before_script:
   - 'pipenv shell'
   - './manage.py makemigrations'
