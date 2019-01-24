@@ -1,4 +1,4 @@
-# aircalc
+# aircalc [![Build Status](https://travis-ci.org/oberdev/aircalc.svg?branch=develop)](https://travis-ci.org/oberdev/aircalc)
 ### Requiments
  * Python 3.7
  * npm
