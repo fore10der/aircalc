@@ -2,5 +2,5 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('', views.build_pdf),
+    path('', views.download_pdf),
 ]
