@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load render_bundle from webpack_loader %}
+{% load staticfiles %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
+        <link rel="stylesheet" href="{% static "style.css" %}" />
+
+    <title>Report</title>   
+</head>
+<body>
+<div id="center">
+    <h1>{% block title %}{{block1_title}}{% endblock title %}</h1>
+
+    <!--<div id="upperLayer">-->
+
+    {% block table %}
+    <table>
+        <tr><th>Customer</th><th>F/H</th><th>NURn</th><th>NFn</th><th>NR</th></tr>
+            {% for j in block2_table %}
+                <!--{% if not j. %} -->
+                    <tr><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td></tr>
+                <!-- {% endif %} -->
+            {% endfor %}
+    </table>
+    {% endblock table %}
+    <!--</div> -->
+
+<br> {% block image %}{{block3_image}}{% endblock image %}</br>
+</div>
+</body>
+</html>
+
+<!--<table>
+        {% for r in results %}
+          {% cycle '<tr>' '' '' '' %}
+            <td>{{r.content}}</td>
+          {% cycle '' '' '' '</tr>' %}
+        {% endfor %}
+</table>-->
