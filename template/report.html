@@ -6,37 +6,85 @@
     <meta charset="utf-8" />
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-        <link rel="stylesheet" href="{% static "style.css" %}" />
+        <!--<link rel="stylesheet" href="{% static "style.css" %}" />-->
 
-    <title>Report</title>   
+    <title>Report</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 2cm;
+        }
+        @frame header_frame {           /* Static frame */
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
+        }
+        @frame col1_frame {             /* Content frame 1 */
+            left: 44pt; width: 245pt; top: 90pt; height: 632pt;
+        }
+        @frame col2_frame {             /* Content frame 2 */
+            left: 323pt; width: 245pt; top: 90pt; height: 632pt;
+        }
+
+        h1{color:black; text-align: center;}        
+        body{ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
+        table{ border: 1px solid black; border-collapse: collapse; margin-left: 5% }
+        thead{background-color: rgb(196, 217, 245);}        
+        #tsubhead{background-color: rgb(119, 189, 255);}
+        tfoot{background-color: rgb(55, 162, 240);}
+        tbody{text-align: center;}
+        #trside{text-align: right;}
+
+        .container { }        
+        #leftblock{ float: left;}
+        #rightblock{margin-left: 5%; float: left; width:658px; height: 465px; background-color: rgb(255, 218, 8);  }
+
+    </style> 
 </head>
 <body>
-<div id="center">
-    <h1>{% block title %}{{block1_title}}{% endblock title %}</h1>
-
-    <!--<div id="upperLayer">-->
-
+    {% block title %}<div id="header_content">   
+            <h1>{{block1_title}} </h1></div>
+    {% endblock title %}     
+    
+    <div class="container">
+    <div id="leftblock"> 
     {% block table %}
-    <table>
-        <tr><th>Customer</th><th>F/H</th><th>NURn</th><th>NFn</th><th>NR</th></tr>
-            {% for j in block2_table %}
-                <!--{% if not j. %} -->
-                    <tr><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td><td>{{ j. }}</td></tr>
-                <!-- {% endif %} -->
-            {% endfor %}
+    <div id="col1_frame">   
+    <table border="1" cellpadding="5" >
+    <thead><tr><th colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </th></tr></thead>
+    <tr id="tsubhead"><th>Customer</th><th>F/H</th><th>NURn</th><th>NFn</th><th>NR</th></tr>
+    
+    <tbody>         
+        {% for j in block2_table %}
+            {% if not j.block2_table %} 
+                <tr><td>{{ j.Customer }}</td><td id="trside">{{ j.F_H}}</td><td>{{ j.NURn }}</td><td>{{ j.NFn }}</td><td>{{ j.NR }}</td></tr>
+            {% endif %} 
+        {% endfor %}
+    </tbody>           
+    
+    <tfoot>
+        <tr><th>Total</th><th>total1</th><th>total2</th><th>total3</th><th>total4</th></tr>
+    </tfoot>
     </table>
+    </div>
+    </div>
     {% endblock table %}
-    <!--</div> -->
 
-<br> {% block image %}{{block3_image}}{% endblock image %}</br>
-</div>
+    {% block img %}
+    
+    <div id="col2_frame" >  
+        <div id="rightblock"> {{block3_image}}</div>
+    </div>
+    </div>  
+    {% endblock img %}
+
+    <!--<h2> <img src="{% static "src/example.jpg" %}"> -->
+
 </body>
 </html>
 
-<!--<table>
-        {% for r in results %}
+<!--{% for r in results %}
           {% cycle '<tr>' '' '' '' %}
             <td>{{r.content}}</td>
           {% cycle '' '' '' '</tr>' %}
         {% endfor %}
-</table>-->
+    -->

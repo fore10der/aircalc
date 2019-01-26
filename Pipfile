@@ -7,6 +7,13 @@ verify_ssl = true
 
 [packages]
 django = "*"
+django-webpack-loader = "*"
+openpyxl = "*"
+xhtml2pdf = "*"
+matplotlib = "*"
+numpy = "*"
+gunicorn = "==19.9.0"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"
