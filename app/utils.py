@@ -18,6 +18,6 @@ def build_pdf(true_context):
     pisaStatus = pisa.CreatePDF( html, dest=response)
     # if error then show some funy view
     print(pisaStatus.error)
-    if pisaStatus.error:
+    if not pisaStatus.error:
        return HttpResponse('We had some errors <pre>' + html +'</pre>')
     return response

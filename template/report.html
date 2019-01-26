@@ -1,13 +1,7 @@
 <!DOCTYPE html>
-{% load render_bundle from webpack_loader %}
-{% load staticfiles %}
 <html>
 <head>
     <meta charset="utf-8" />
-    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">-->
-        <!--<link rel="stylesheet" href="{% static "style.css" %}" />-->
-
     <title>Report</title>
     <style>
         @page {
@@ -76,13 +70,5 @@
 
     </div>  
     {% endblock img %}
-
 </body>
 </html>
-
-<!--{% for r in results %}
-          {% cycle '<tr>' '' '' '' %}
-            <td>{{r.content}}</td>
-          {% cycle '' '' '' '</tr>' %}
-        {% endfor %}
-    -->
