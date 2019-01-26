@@ -27,14 +27,14 @@
 
         h1{color:black; text-align: center;}        
         body{ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
-        table{ border: 1px solid black; border-collapse: collapse; margin-left: 5% }
+        table{ border: 1px solid black; border-collapse: collapse; }
         thead{background-color: rgb(196, 217, 245);}        
         #tsubhead{background-color: rgb(119, 189, 255);}
         tfoot{background-color: rgb(55, 162, 240);}
         tbody{text-align: center;}
         #trside{text-align: right;}
 
-        .container { }        
+        .container {margin-left: 5%; }        
         #leftblock{ float: left;}
         #rightblock{margin-left: 5%; float: left; width:658px; height: 465px; background-color: rgb(255, 218, 8);  }
 
@@ -71,13 +71,11 @@
 
     {% block img %}
     
-    <div id="col2_frame" >  
-        <div id="rightblock"> {{block3_image}}</div>
-    </div>
+    <!--<div id="col2_frame"> <div id="rightblock"> <img src="data:image/png;base64,{{image}}" /></div> </div> --> 
+     <div id="col2_frame"> <div id="rightblock"> {{block3_image}}</div> </div>        
+
     </div>  
     {% endblock img %}
-
-    <!--<h2> <img src="{% static "src/example.jpg" %}"> -->
 
 </body>
 </html>
