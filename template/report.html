@@ -6,47 +6,29 @@
     <style>
         @page {
             size: A4 landscape;
-            margin: 2cm;
+            margin: 0;
+            @frame header_frame {           /* Static frame */
+                -pdf-frame-content: header_content;
+                right: 50pt; left: 50pt; top: 50pt; height: 40pt; width: 742pt;
+            }
+            @frame col1_frame {             /* Content frame 1 */
+                -pdf-frame-content: table;
+                left: 50pt; width: 331pt; top: 140pt;
+            }
+            @frame col2_frame {             /* Content frame 2 */
+                -pdf-frame-content: plot;
+                left: 461pt; width: 331pt; top: 140pt;
+            }
         }
-        @frame header_frame {           /* Static frame */
-            -pdf-frame-content: header_content;
-            left: 50pt; width: 512pt; top: 50pt; height: 40pt;
-        }
-        @frame col1_frame {             /* Content frame 1 */
-            left: 44pt; width: 245pt; top: 90pt; height: 632pt;
-        }
-        @frame col2_frame {             /* Content frame 2 */
-            left: 323pt; width: 245pt; top: 90pt; height: 632pt;
-        }
-
-        h1{color:black; text-align: center;}        
-        body{ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;}
-        table{ border: 1px solid black; border-collapse: collapse; }
-        thead{background-color: rgb(196, 217, 245);}        
-        #tsubhead{background-color: rgb(119, 189, 255);}
-        tfoot{background-color: rgb(55, 162, 240);}
-        tbody{text-align: center;}
-        #trside{text-align: right;}
-
-        .container {margin-left: 5%; }        
-        #leftblock{ float: left;}
-        #rightblock{margin-left: 5%; float: left; width:658px; height: 465px; background-color: rgb(255, 218, 8);  }
-
     </style> 
 </head>
 <body>
-    {% block title %}<div id="header_content">   
-            <h1>{{block1_title}} </h1></div>
-    {% endblock title %}     
-    
-    <div class="container">
-    <div id="leftblock"> 
-    {% block table %}
-    <div id="col1_frame">   
-    <table border="1" cellpadding="5" >
+    <div id="header_content">   
+            <h1>{{block1_title}} </h1>
+    </div> 
+    <table id="table" border="1" cellpadding="5" >
     <thead><tr><th colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </th></tr></thead>
     <tr id="tsubhead"><th>Customer</th><th>F/H</th><th>NURn</th><th>NFn</th><th>NR</th></tr>
-    
     <tbody>         
         {% for j in block2_table %}
             {% if not j.block2_table %} 
@@ -54,21 +36,11 @@
             {% endif %} 
         {% endfor %}
     </tbody>           
-    
     <tfoot>
         <tr><th>Total</th><th>total1</th><th>total2</th><th>total3</th><th>total4</th></tr>
     </tfoot>
     </table>
-    </div>
-    </div>
-    {% endblock table %}
-
-    {% block img %}
-    
-    <!--<div id="col2_frame"> <div id="rightblock"> <img src="data:image/png;base64,{{image}}" /></div> </div> --> 
-     <div id="col2_frame"> <div id="rightblock"> {{block3_image}}</div> </div>        
-
-    </div>  
-    {% endblock img %}
+    <img id="plot" src="https://cdn1.flamp.ru/d4e3c000d7c76cf092bb3f902a398a00_1920.png" />
+    <img id="plot" src="data:image/png;base64,{{image}}" />
 </body>
 </html>
