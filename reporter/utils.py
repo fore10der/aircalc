@@ -11,11 +11,13 @@ from dateutil.rrule import rrule, MONTHLY
 from dateutil.relativedelta import relativedelta
 from xhtml2pdf import pisa
 
+#Заглушка для таблицы
 table = [ { 'Customer' :  1, 'F_H' : 11, 'NURn' :  111, 'NFn' : 1111, 'NR' : 11111},
 { 'Customer' :  2, 'F_H' : 22, 'NURn' :  222, 'NFn' : 2222, 'NR' : 22222},
 { 'Customer' :  3, 'F_H' : 33, 'NURn' :  333, 'NFn' : 3333, 'NR' : 33333},
 { 'Customer' :  4, 'F_H' : 44, 'NURn' :  444, 'NFn' : 4444, 'NR' : 44444}]
 
+#Берем снятия/поломки в промежутке от 1-1-2017 ~ 2018-12-1 для всех блоков из бд с окном 3 месяца
 def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), window_value = 3):
     units_ids = list(Unit.objects.all().values_list('id', flat=True))
     eps = (window_value - 1)//2 if window_value % 2 else window_value // 2
@@ -40,6 +42,7 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
         })
     return units_stats, dates
 
+#Строим графики и формируем датасет для pdf
 def build_plots(data, dates):
     units = []
     for unit_info in data:
@@ -57,7 +60,7 @@ def build_plots(data, dates):
         units.append({
             "title": unit_info["unit_number"],
             "plot": image_base64,
-            #TO DO: remove
+            #TO DO: удалить заглушку данных с таблицы
             "table": table
             }),
         buf.close()
