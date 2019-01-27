@@ -40,8 +40,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'loader',
     'units',
-    'aircarts',
-    'app'
+    'aircarts'
 ]
 
 MIDDLEWARE = [
@@ -133,4 +132,3 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-print(STATICFILES_DIRS[0])
