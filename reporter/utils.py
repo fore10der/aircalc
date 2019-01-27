@@ -3,31 +3,36 @@ import matplotlib.pyplot as plt
 from matplotlib.dates import num2date
 from django.http import HttpResponse
 from django.template.loader import get_template
-from django.db.models import F, Sum
 import io
 import base64
-from units.models import UnitAction
+from units.models import UnitAction, Unit
 import datetime
 from dateutil.rrule import rrule, MONTHLY
 from dateutil.relativedelta import relativedelta
 
-
-
-
-def draw_plot(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), unit_id = 1, window_value = 3):
+def draw_plot(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), window_value = 3):
+    units_ids = list(Unit.objects.all().values_list('id', flat=True))
     eps = (window_value - 1)//2 if window_value % 2 else window_value // 2
     mouth_eps = relativedelta(months=eps)
     dates = list(rrule(MONTHLY, dtstart=start_date, until=end_date))
+    units_stats = list()
     X_count = len(dates)
-    total_removals = UnitAction.objects.filter(unit_id=unit_id, date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=0)
-    total_induced = UnitAction.objects.filter(unit_id=unit_id, date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=1)
-    removals = np.zeros(X_count)
-    induced = np.zeros(X_count)
-    for i in np.arange(X_count):
-        removals[i] = total_removals.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=0).count()
-        induced[i] = total_induced.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=1).count()
-    print(removals)
-    print(induced)
+    total_units = Unit.objects.all()
+    total_removals = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=0)
+    total_induced = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date + mouth_eps + relativedelta(months=1)], action_type=1)
+    for unit_id in units_ids:
+        unit_number = total_units.get(id=unit_id).unit_number
+        removals = np.zeros(X_count)
+        induced = np.zeros(X_count)
+        for i in np.arange(X_count):
+            removals[i] = total_removals.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=0).count()
+            induced[i] = total_induced.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i] + mouth_eps + relativedelta(months=1)], action_type=1).count()
+        units_stats.append({
+            "unit_number": unit_number,
+            "removals": removals,
+            "induced": induced
+        })
+    print(units_stats)
 
 def build_bars(data):
     context = []

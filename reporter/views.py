@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.http import HttpResponse
+from .utils import draw_plot
 
-# Create your views here.
+def download_pdf(request):
+    draw_plot()
+    return HttpResponse("ass we can")

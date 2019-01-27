@@ -8,5 +8,6 @@ urlpatterns = [
     path('getpdf', views.getpdf),
 
     path('loader/', include('loader.urls')),
+    path('reporter/',include('reporter.urls')),
     path('', include('base.urls'))
 ]
