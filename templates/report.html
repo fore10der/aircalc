@@ -43,7 +43,7 @@
 </head>
 <body>
 {% with units.0 as unit %}
-{% for unit in units %}
+{% comment %} {% for unit in units %} {% endcomment %}
     <div id="header_content">
         <div class="title">
             <h1>{{unit.title}}</h1>
@@ -67,7 +67,7 @@
     <pdf:nextframe />
     <img id="plot" src="data:image/png;base64,{{unit.plot}}" />
     <pdf:nextpage />
-{% endfor %}
+{% comment %} {% endfor %} {% endcomment %}
 {% endwith %}
 </body>
 </html>
