@@ -34,10 +34,19 @@
         td {
             text-align: center;
             width: 18.75%;
-            line-height: 0
+            line-height: 0;
         }
         td.table-title {
             width: 25%
+        }
+        .tfoot td {
+            background-color: #37a2f0;
+        }
+        .thead td {
+            background-color: #c4d9f5;
+        }
+        .tsubhead td {
+            background-color: #89BCFC;
         }
     </style> 
 </head>
@@ -51,8 +60,8 @@
     </div>
     <pdf:nextframe />
     <table id="table" border="1" cellpadding="2" >
-    <thead><tr><th colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </th></tr></thead>
-    <tr id="tsubhead"><th>Customer</th><th>F/H</th><th>NURn</th><th>NFn</th><th>NR</th></tr>
+    <thead class="thead"><tr><td colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </td></tr></thead>
+    <tr class="tsubhead"><td>Customer</td><td>F/H</td><td>NURn</td><td>NFn</td><td>NR</td></tr>
     <tbody>         
         {% for j in unit.table %}
             {% if not j.table %} 
@@ -60,8 +69,8 @@
             {% endif %} 
         {% endfor %}
     </tbody>           
-    <tfoot>
-        <tr><th>Total</th><th>total1</th><th>total2</th><th>total3</th><th>total4</th></tr>
+    <tfoot class="tfoot">
+        <tr><td>Total</td><td>total1</td><td>total2</td><td>total3</td><td>total4</td></tr>
     </tfoot>
     </table>
     <pdf:nextframe />
