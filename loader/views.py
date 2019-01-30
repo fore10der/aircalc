@@ -11,5 +11,4 @@ class TestFileView(FormView):
     
     def form_valid(self, form):
         data = preprocess_xlsx(self.request.FILES['file_input'])
-        print(data)
         store_to_db(data)

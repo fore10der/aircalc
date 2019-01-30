@@ -51,11 +51,16 @@ def store_to_db(data):
                             PlaneFlightHours.objects.update_or_create(plane_id=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
                         else:
                             PlaneFlightHours.objects.create(plane_id=obj[0], date=num2date(event[0]), count=event[1])
-        elif leaf_name == 'Failures' or leaf_name == 'Induced':
+        else:
             for leaf_row in leaf_content:
+                if leaf_name == 'Removals':
+                    mark = 0
+                elif leaf_name == 'Failures':
+                    mark = 1   
+                elif leaf_name == 'Induced':
+                    mark = 2
                 source = UnitCreator.objects.get_or_create(name=leaf_row['source'])
                 obj = Unit.objects.get_or_create(manufacturer_id=source[0], unit_number=leaf_row['name'])
                 for event in leaf_row['statistic']:
-                    mark = 0 if leaf_name == 'Induced' else 1
                     for _ in np.arange(event[1]):
                         UnitAction.objects.create(unit_id=obj[0], date=num2date(event[0]), action_type=mark)

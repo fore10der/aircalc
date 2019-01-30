@@ -1,8 +1,9 @@
 from django.db import models
 
 ACTION_TYPES = (
-    (0, 'снятие'),
-    (1, 'неисправность'),
+    (0, 'removals'),
+    (1, 'failures'),
+    (2, 'induced')
 )
 
 class UnitCreator(models.Model):
@@ -27,5 +28,5 @@ class UnitAction(models.Model):
     action_type = models.CharField(max_length=1, choices=ACTION_TYPES)
 
     def __str__(self):
-        return self.date
+        return str(self.date)
 
