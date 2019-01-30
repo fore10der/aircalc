@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Report</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+            @frame header_frame {           /* Static frame */
+                right: 50pt; left: 50pt; top: 50pt; height: 40pt; width: 742pt;
+            }
+            @frame col1_frame {             /* Content frame 1 */
+                left: 50pt; width: 251pt; top: 140pt;
+            }
+            @frame col2_frame {             /* Content frame 2 */
+                left: 301pt; width: 541pt; top: 90pt;
+            }
+        }
+        @font-face {
+            font-family: Arial;
+            src: url(/media/username/BND/gss/static/dist/arial.ttf);
+        }
+        body {
+            font-family: Arial;
+        }
+        h1 {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .title {
+            text-align: center;
+        }
+        td {
+            text-align: center;
+            width: 18.75%;
+            line-height: 0;
+        }
+        td.table-title {
+            width: 25%
+        }
+        .tfoot td {
+            background-color: #37a2f0;
+        }
+        .thead td {
+            background-color: #c4d9f5;
+        }
+        .tsubhead td {
+            background-color: #89BCFC;
+        }
+    </style> 
+</head>
+<body>
+{% with units.0 as unit %}
+{% comment %} {% for unit in units %} {% endcomment %}
+    <div id="header_content">
+        <div class="title">
+            <h1>{{unit.title}}</h1>
+        </div>
+    </div>
+    <pdf:nextframe />
+    <table id="table" border="1" cellpadding="2" >
+    <thead class="thead"><tr><td colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </td></tr></thead>
+    <tr class="tsubhead"><td>Customer</td><td>F/H</td><td>NURn</td><td>NFn</td><td>NR</td></tr>
+    <tbody>         
+        {% for j in unit.table %}
+            {% if not j.table %} 
+                <tr><td class="table-title">{{ j.Customer }}</td><td id="trside">{{ j.F_H}}</td><td>{{ j.NURn }}</td><td>{{ j.NFn }}</td><td>{{ j.NR }}</td></tr>
+            {% endif %} 
+        {% endfor %}
+    </tbody>           
+    <tfoot class="tfoot">
+        <tr><td>Total</td><td>total1</td><td>total2</td><td>total3</td><td>total4</td></tr>
+    </tfoot>
+    </table>
+    <pdf:nextframe />
+    <img id="plot" src="data:image/png;base64,{{unit.plot}}" />
+    <pdf:nextpage />
+{% comment %} {% endfor %} {% endcomment %}
+{% endwith %}
+</body>
+</html>
