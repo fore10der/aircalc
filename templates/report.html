@@ -9,14 +9,12 @@
             margin: 0;
             @frame header_frame {           /* Static frame */
                 right: 50pt; left: 50pt; top: 50pt; height: 70pt; width: 441pt;
-                -pdf-frame-border: 1;
             }
             @frame col1_frame {             /* Content frame 1 */
                 left: 50pt; width: 171pt; top: 170pt;
             }
             @frame col2_frame {             /* Content frame 2 */
                 left: 221pt; width: 661pt; top: 120pt;
-                -pdf-frame-border: 1;
             }
         }
         @font-face {
@@ -51,10 +49,15 @@
             background-color: #89BCFC;
         }
         .unit-headtd {
-            line-height: 1.8;
+            line-height: 3 !important;
+            background-color: #c4d9f5 !important;
+            border-bottom-width: 0;
         }
         .unit-value {
             width: 100px;
+        }
+        #header_content tr td:last-child {
+            border: none;
         }
     </style> 
 </head>
@@ -63,12 +66,12 @@
 {% comment %} {% for unit in units %} {% endcomment %}
     <table id="header_content" border="1" cellpadding="2">
         <tbody>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td><td rowspan="6" colspan="2">NURn</td></tr>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td></tr>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td></tr>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td></tr>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td></tr>
-            <tr><td class="unit-headtd">Customer</td><td class="unit-value">F/H</td></tr>
+            <tr><td class="unit-headtd">Supplier</td><td class="unit-value"></td><td rowspan="6" colspan="2">NURn</td></tr>
+            <tr><td class="unit-headtd">Part number</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Component name</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Qty per aircraft</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">MTBUR</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Relability</td><td class="unit-value"></td></tr>
         {% comment %} <div class="title">
             <h1>{{unit.title}}</h1>
         </div> {% endcomment %}
