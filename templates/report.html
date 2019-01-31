@@ -8,13 +8,13 @@
             size: A4 landscape;
             margin: 0;
             @frame header_frame {           /* Static frame */
-                right: 50pt; left: 50pt; top: 50pt; height: 40pt; width: 742pt;
+                right: 50pt; left: 50pt; top: 50pt; height: 70pt; width: 441pt;
             }
             @frame col1_frame {             /* Content frame 1 */
-                left: 50pt; width: 251pt; top: 140pt;
+                left: 50pt; width: 171pt; top: 170pt;
             }
             @frame col2_frame {             /* Content frame 2 */
-                left: 301pt; width: 541pt; top: 90pt;
+                left: 221pt; width: 661pt; top: 120pt;
             }
         }
         @font-face {
@@ -33,7 +33,7 @@
         }
         td {
             text-align: center;
-            width: 18.75%;
+            width: 50%;
             line-height: 0;
         }
         td.table-title {
@@ -48,29 +48,45 @@
         .tsubhead td {
             background-color: #89BCFC;
         }
+        .unit-headtd {
+            line-height: 3 !important;
+            background-color: #c4d9f5 !important;
+            border-bottom-width: 0;
+        }
+        .unit-value {
+            width: 100px;
+        }
     </style> 
 </head>
 <body>
 {% with units.0 as unit %}
 {% comment %} {% for unit in units %} {% endcomment %}
-    <div id="header_content">
-        <div class="title">
+    <table id="header_content" border="1" cellpadding="2">
+        <tbody>
+            <tr><td class="unit-headtd">Supplier</td><td class="unit-value"></td><td rowspan="6" colspan="2">NURn</td></tr>
+            <tr><td class="unit-headtd">Part number</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Component name</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Qty per aircraft</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">MTBUR</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Relability</td><td class="unit-value"></td></tr>
+        {% comment %} <div class="title">
             <h1>{{unit.title}}</h1>
-        </div>
-    </div>
+        </div> {% endcomment %}
+        </tbody>
+    </table>
     <pdf:nextframe />
-    <table id="table" border="1" cellpadding="2" >
-    <thead class="thead"><tr><td colspan="5" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </td></tr></thead>
-    <tr class="tsubhead"><td>Customer</td><td>F/H</td><td>NURn</td><td>NFn</td><td>NR</td></tr>
+    <table id="table" border="1" cellpadding="2">
+    <thead class="thead"><tr><td colspan="2" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </td></tr></thead>
+    <tr class="tsubhead"><td>Customer</td><td>F/H</td></tr>
     <tbody>         
         {% for j in unit.table %}
             {% if not j.table %} 
-                <tr><td class="table-title">{{ j.Customer }}</td><td id="trside">{{ j.F_H}}</td><td>{{ j.NURn }}</td><td>{{ j.NFn }}</td><td>{{ j.NR }}</td></tr>
+                <tr><td class="table-title">{{ j.Customer }}</td><td id="trside">{{ j.F_H}}</td></tr>
             {% endif %} 
         {% endfor %}
     </tbody>           
     <tfoot class="tfoot">
-        <tr><td>Total</td><td>total1</td><td>total2</td><td>total3</td><td>total4</td></tr>
+        <tr><td>Total</td><td>total1</td></tr>
     </tfoot>
     </table>
     <pdf:nextframe />
