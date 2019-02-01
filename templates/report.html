@@ -59,12 +59,12 @@
     </style> 
 </head>
 <body>
-{% with units.0 as unit %}
-{% comment %} {% for unit in units %} {% endcomment %}
+{% with units_stats.0 as unit %}
+{% comment %} {% for unit in units_stats %} {% endcomment %}
     <table id="header_content" border="1" cellpadding="2">
         <tbody>
-            <tr><td class="unit-headtd">Supplier</td><td class="unit-value"></td><td rowspan="6" colspan="2">NURn</td></tr>
-            <tr><td class="unit-headtd">Part number</td><td class="unit-value"></td></tr>
+            <tr><td class="unit-headtd">Supplier</td><td class="unit-value">{{unit.supplier}}</td><td rowspan="6" colspan="2">{{unit.number}}</td></tr>
+            <tr><td class="unit-headtd">Part number</td><td class="unit-value">{{unit.number}}</td></tr>
             <tr><td class="unit-headtd">Component name</td><td class="unit-value"></td></tr>
             <tr><td class="unit-headtd">Qty per aircraft</td><td class="unit-value"></td></tr>
             <tr><td class="unit-headtd">MTBUR</td><td class="unit-value"></td></tr>
@@ -76,17 +76,15 @@
     </table>
     <pdf:nextframe />
     <table id="table" border="1" cellpadding="2">
-    <thead class="thead"><tr><td colspan="2" scope="colgroup"> M months from Month1 Year1 to Month2 Year2 </td></tr></thead>
+    <thead class="thead"><tr><td colspan="2" scope="colgroup"> {{report_bounds.interval}} months from {{report_bounds.start}} to {{report_bounds.end}} </td></tr></thead>
     <tr class="tsubhead"><td>Customer</td><td>F/H</td></tr>
     <tbody>         
-        {% for j in unit.table %}
-            {% if not j.table %} 
-                <tr><td class="table-title">{{ j.Customer }}</td><td id="trside">{{ j.F_H}}</td></tr>
-            {% endif %} 
+        {% for fh_stat in companies_stats.fh_stats %}
+            <tr><td class="table-title">{{ fh_stat.board_number }}</td><td id="trside">{{ fh_stat.value}}</td></tr>
         {% endfor %}
     </tbody>           
     <tfoot class="tfoot">
-        <tr><td>Total</td><td>total1</td></tr>
+        <tr><td>Total</td><td>{{companies_stats.total_fh}}</td></tr>
     </tfoot>
     </table>
     <pdf:nextframe />
