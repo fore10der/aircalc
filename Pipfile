@@ -15,7 +15,6 @@ numpy = "*"
 gunicorn = "==19.9.0"
 python-dateutil = "*"
 django-stronghold = "*"
-django-login-required = "*"
 
 [requires]
 python_version = "3.7"
