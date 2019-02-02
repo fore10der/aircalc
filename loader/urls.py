@@ -2,5 +2,5 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('', views.TestFileView.as_view()),
+    path('', views.TestFileView.as_view(), name="loader"),
 ]

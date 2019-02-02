@@ -14,6 +14,7 @@ matplotlib = "*"
 numpy = "*"
 gunicorn = "==19.9.0"
 python-dateutil = "*"
-
+django-stronghold = "*"
+ 
 [requires]
 python_version = "3.7"
