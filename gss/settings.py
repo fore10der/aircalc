@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'loader',
     'units',
     'aircarts',
-    'stronghold',
+    'login_required'
 ]
 
 MIDDLEWARE = [
@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'stronghold.middleware.LoginRequiredMiddleware',
+    'login_required.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -114,9 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_REDIRECT_URL = 'loader'
+LOGIN_URL = "/login/"
 
-LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = 'loader'
 
 LANGUAGE_CODE = 'ru-ru'
 
