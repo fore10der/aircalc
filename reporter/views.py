@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from gss.utils import group_required
 from .utils import build_report, get_data, build_plots, get_date_bounds
+
 #Генерируем и собираем pdf
+@group_required('can_report')
 def getpdf(request):
     #Собираем статистику
     companies_stats, units_stats, dates = get_data()

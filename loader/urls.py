@@ -1,6 +1,7 @@
 from . import views
 from django.urls import path, include
+from gss.utils import group_required
 
 urlpatterns = [
-    path('', views.TestFileView.as_view(), name="loader"),
+    path('', group_required('can_input')(views.TestFileView.as_view()), name="loader"),
 ]
