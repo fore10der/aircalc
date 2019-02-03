@@ -11,9 +11,9 @@ class PlaneCompany(models.Model):
 #Воздушное судно
 class Plane(models.Model):
     #Номер воздушного судна
-    board_number = models.CharField(max_length=16)
+    number = models.CharField(max_length=16)
     #Компания производитель
-    company_id = models.ForeignKey(PlaneCompany,on_delete=models.CASCADE)
+    company = models.ForeignKey(PlaneCompany,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.board_number
@@ -23,7 +23,7 @@ class PlaneFlightHours(models.Model):
     #Дата полета
     date = models.DateField()
     #ВС
-    plane_id = models.ForeignKey(Plane, on_delete=models.CASCADE)
+    plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
     #Часов в полете
     count = models.PositiveIntegerField(default=0)
 

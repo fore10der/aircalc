@@ -15,12 +15,12 @@ class UnitCreator(models.Model):
 #Блок
 class Unit(models.Model):
     #Наимиенование блока
-    unit_number = models.CharField(max_length=16)
+    number = models.CharField(max_length=16)
     #Поставщик блока
-    manufacturer_id = models.ForeignKey(UnitCreator, on_delete=models.CASCADE)
+    manufacturer = models.ForeignKey(UnitCreator, on_delete=models.CASCADE)
 
     class Meta:
-        unique_together = (("unit_number", "manufacturer_id"),)
+        unique_together = (("number", "manufacturer"),)
 
     def __str__(self):
         return self.unit_number
@@ -28,8 +28,8 @@ class Unit(models.Model):
 class UnitAction(models.Model):
     #Дата события
     date = models.DateField()
-    #Имя блока
-    unit_id = models.ForeignKey(Unit, on_delete=models.CASCADE)
+    #Блок
+    unit = models.ForeignKey(Unit, on_delete=models.CASCADE)
     #Тип события
     action_type = models.CharField(max_length=1, choices=ACTION_TYPES)
 

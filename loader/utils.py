@@ -39,16 +39,16 @@ def store_to_db(data):
                 #Проверяем на создание компанию
                 source = PlaneCompany.objects.get_or_create(name=leaf_row['source'])
                 #Проверяем на создание самолет
-                obj = Plane.objects.get_or_create(company_id=source[0], board_number=leaf_row['name'])
+                obj = Plane.objects.get_or_create(company=source[0], number=leaf_row['name'])
                 #Идем по статистике
                 for event in leaf_row['statistic']:
                     #Проверка на пустоту статистики
                     if event[1]!=0:
                         #Проверка на наличие в базе
-                        if PlaneFlightHours.objects.filter(plane_id=obj[0], date=num2date(event[0])).exists():
-                            PlaneFlightHours.objects.update_or_create(plane_id=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
+                        if PlaneFlightHours.objects.filter(plane=obj[0], date=num2date(event[0])).exists():
+                            PlaneFlightHours.objects.update_or_create(plane=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
                         else:
-                            PlaneFlightHours.objects.create(plane_id=obj[0], date=num2date(event[0]), count=event[1])
+                            PlaneFlightHours.objects.create(plane=obj[0], date=num2date(event[0]), count=event[1])
         else:
             #Заполняем статистику для блоков
             for leaf_row in leaf_content:
@@ -60,8 +60,8 @@ def store_to_db(data):
                     mark = 2
                 #Снова проверяем на объект/источник
                 source = UnitCreator.objects.get_or_create(name=leaf_row['source'])
-                obj = Unit.objects.get_or_create(manufacturer_id=source[0], unit_number=leaf_row['name'])
+                obj = Unit.objects.get_or_create(manufacturer=source[0], number=leaf_row['name'])
                 for event in leaf_row['statistic']:
                     #Вставляем failtures/removals столько раз сколько было описано в excel
                     for _ in np.arange(event[1]):
-                        UnitAction.objects.create(unit_id=obj[0], date=num2date(event[0]), action_type=mark)
+                        UnitAction.objects.create(unit=obj[0], date=num2date(event[0]), action_type=mark)

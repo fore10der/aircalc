@@ -33,13 +33,13 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     #Запрошенные компании
     requested_companies = PlaneCompany.objects.filter(id__in=companies_ids)
     #Самолеты запрошенных компаний
-    requested_planes = Plane.objects.filter(company_id__in=requested_companies)
+    requested_planes = Plane.objects.filter(company__in=requested_companies)
     #Все (?) блоки из бд
     total_units = Unit.objects.all()
     #Все производители блоков
     total_manufacturers = UnitCreator.objects.all()
     #Все факты занесения статистики об времени полета для выбранных самолетов
-    total_fh = PlaneFlightHours.objects.filter(plane_id__in=requested_planes)
+    total_fh = PlaneFlightHours.objects.filter(plane__in=requested_planes)
     #Все факты занесения статистики об removals/failures за весь период с учетом окна
     total_removals = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=0)
     total_failures = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=1)
@@ -52,8 +52,8 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
         failures_stat = np.zeros(X_count)
         #Заполняем вектора
         for i in np.arange(X_count):
-            removals = total_removals.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
-            failures = total_failures.filter(unit_id=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
+            removals = total_removals.filter(unit=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
+            failures = total_failures.filter(unit=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
             fh = total_fh.filter(date__range=[dates[i]-mouth_eps,dates[i]]).aggregate(Sum("count"))['count__sum']
             removals = removals if removals!=0 else np.inf
             failures = failures if failures!=0 else np.inf
@@ -62,8 +62,8 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
             failures_stat[i] = fh/failures
         #Заполняем статистику блоков
         units_stats.append({
-            "number": unit.unit_number,
-            "supplier": unit.manufacturer_id.name,
+            "number": unit.number,
+            "supplier": unit.manufacturer.name,
             "removals": removals_stat,
             "failures": failures_stat
         })
@@ -71,7 +71,7 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     for requested_company in requested_companies:
         companies_stats["fh_stats"].append({
             "board_number": requested_company.name,
-            "value": total_fh.filter(plane_id__in=requested_planes.filter(company_id=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
+            "value": total_fh.filter(plane__in=requested_planes.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
         })
     #Считаем суммарное fh для всех самолетов всех компаний
     companies_stats["total_fh"] = sum([fh_stat["value"] for fh_stat in companies_stats["fh_stats"]])
