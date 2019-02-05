@@ -116,6 +116,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LOGIN_URL = "/login/"
 
+LOGOUT_REDIRECT_URL = "/logout/"
+
 LOGIN_REDIRECT_URL = 'loader'
 
 LANGUAGE_CODE = 'ru-ru'
