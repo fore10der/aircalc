@@ -3,5 +3,19 @@ version: '3.7'
 services:
   web:
     build: .
+    command: python /usr/src/app/manage.py runserver 0.0.0.0:8000 --settings=gss.settings.ci
     ports:
       - 8000:8000
+    environment:
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=postgres
+      - SQL_USER=postgres
+      - SQL_PASSWORD=postgres
+      - SQL_HOST=db
+      - SQL_PORT=5432
+    depends_on:
+      - db
+    volumes:
+      - /static:/usr/src/app/static
+  db:
+    image: postgres:11.1-alpine
