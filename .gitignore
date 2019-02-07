@@ -120,6 +120,7 @@ static/
 
 # vscode
 *.code-workspace
+.vscode/
 
 #Pipfie
 *.lock
