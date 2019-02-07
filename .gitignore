@@ -16,7 +16,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-.vscode/
 lib/
 lib64/
 parts/
@@ -120,6 +119,12 @@ dmypy.json
 static/
 
 # vscode
+.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 *.code-workspace
 
 #Pipfie
