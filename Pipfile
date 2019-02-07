@@ -12,7 +12,6 @@ matplotlib = "*"
 numpy = "*"
 python-dateutil = "*"
 django-login-required = "*"
-psycopg2 = "*"
 psycopg2-binary = "*"
 
 [requires]
