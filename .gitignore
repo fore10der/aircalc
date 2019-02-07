@@ -16,6 +16,7 @@ dist/
 downloads/
 eggs/
 .eggs/
+.vscode/
 lib/
 lib64/
 parts/
@@ -120,7 +121,6 @@ static/
 
 # vscode
 *.code-workspace
-.vscode/
 
 #Pipfie
 *.lock
