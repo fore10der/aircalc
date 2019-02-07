@@ -4,6 +4,7 @@ python:
 services:
   - postgresql
 install:
+  - pip install pipenv
   - pipenv install --skip-lock --system --dev
 before_script:
   - psql -c 'create database travisci;' -U postgres
