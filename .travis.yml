@@ -9,7 +9,7 @@ install:
   - pipenv sync
 before_script:
   - psql -c 'create database travisci;' -U postgres
-  - python manage.py makemigrations --settings=gss.settings.ci
-  - python manage.py migrate --settings=gss.settings.ci
+  - python app/manage.py makemigrations --settings=gss.settings.ci
+  - python app/manage.py migrate --settings=gss.settings.ci
 script:
-  - python manage.py test --settings=gss.settings.ci
+  - python app/manage.py test --settings=gss.settings.ci

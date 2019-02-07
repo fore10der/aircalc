@@ -18,9 +18,10 @@ WORKDIR /usr/src/app
 RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile /usr/src/app/Pipfile
+COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
 RUN pipenv install --skip-lock --system --dev
 
 # copy project
-COPY . /usr/src/app/
+COPY ./app /usr/src/app/
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
