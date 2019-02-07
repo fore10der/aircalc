@@ -4,9 +4,7 @@ python:
 services:
   - postgresql
 install:
-  - pip install pipenv
-  - pipenv lock
-  - pipenv sync
+  - pipenv install --skip-lock --system --dev
 before_script:
   - psql -c 'create database travisci;' -U postgres
   - python app/manage.py makemigrations --settings=gss.settings.ci
