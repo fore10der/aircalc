@@ -17,7 +17,7 @@ class AircartsModelsTests(TestCase):
             AircartCompany.objects.create(name=company["name"])
         for aircart in AIRCARTS:
             Aircart.objects.create(number=aircart["number"], \
-                                    company=AircartCompany.objects.get(id=aircart["company_id"]) \
+                                    company=AircartCompany.objects.get(id=aircart["company_id"]+1) \
                                     )
         for flight_record in AIRCARTS_FLIGHT_RECORDS:
             AircartFlightRecord.objects.create(date=date(flight_record["date"]["year"],flight_record["date"]["mouth"],flight_record["date"]["day"]), \
