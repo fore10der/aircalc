@@ -18,11 +18,11 @@
             }
         }
         @font-face {
-            font-family: Arial;
-            src: url(/media/username/BND/gss/static/dist/arial.ttf);
+            font-family: Roboto;
+            src: url(src/fonts/Roboto-Regular.ttf);
         }
         body {
-            font-family: Arial;
+            font-family: Roboto;
         }
         h1 {
             margin-left: auto;
@@ -59,8 +59,8 @@
     </style> 
 </head>
 <body>
-{% with units_stats.0 as unit %}
-{% comment %} {% for unit in units_stats %} {% endcomment %}
+{% comment %} {% with units_stats.0 as unit %} {% endcomment %}
+{% for unit in units_stats %}
     <table id="header_content" border="1" cellpadding="2">
         <tbody>
             <tr><td class="unit-headtd">Supplier</td><td class="unit-value">{{unit.supplier}}</td><td rowspan="6" colspan="2">{{unit.number}}</td></tr>
@@ -90,7 +90,7 @@
     <pdf:nextframe />
     <img id="plot" src="data:image/png;base64,{{unit.plot}}" />
     <pdf:nextpage />
-{% comment %} {% endfor %} {% endcomment %}
-{% endwith %}
+{% endfor %}
+{% comment %} {% endwith %} {% endcomment %}
 </body>
 </html>

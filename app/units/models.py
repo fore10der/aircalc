@@ -23,7 +23,7 @@ class Unit(models.Model):
         unique_together = (("number", "manufacturer"),)
 
     def __str__(self):
-        return self.unit_number
+        return self.number
 #Событие для блока
 class UnitAction(models.Model):
     #Дата события
