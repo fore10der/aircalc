@@ -5,20 +5,20 @@ from django.contrib.auth.models import Group
 from django.test import TestCase
 
 class LoginPageTests(TestCase):
-    def setUp(self):
+    def setUpTestData():
         Group.objects.get_or_create(name='can_input')
         Group.objects.get_or_create(name='can_report')
-        self.superuser = User.objects.create_superuser(username='root',
+        User.objects.create_superuser(username='root',
                                  email='test@dude.com',
                                  password='root')
-        self.can_report_user = User.objects.create_user(username='dummy_1',
+        User.objects.create_user(username='dummy_1',
                                  email='test@dude.com',
                                  password='dummy_1')
-        self.can_input_user = User.objects.create_user(username='dummy_2',
+        User.objects.create_user(username='dummy_2',
                                  email='test@dude.com',
                                  password='dummy_2')
-        Group.objects.get(name='can_input').user_set.add(self.can_input_user)
-        Group.objects.get(name='can_report').user_set.add(self.can_report_user)
+        Group.objects.get(name='can_input').user_set.add(User.objects.get(username='dummy_2'))
+        Group.objects.get(name='can_report').user_set.add(User.objects.get(username='dummy_1'))
     def test_anon_request(self):
         self.assertRedirects(self.client.get('/loader/'),LOGIN_URL)
         self.assertRedirects(self.client.get('/reporter/'),LOGIN_URL)

@@ -12,29 +12,28 @@ AIRCARTS = json.load(open(os.path.join(BASE_DIR, 'aircarts', 'aircarts.json')))
 
 
 class AircartsModelsTests(TestCase):
-    def setUp(self):
-        self.companies = []
-        self.aircarts = []
-        self.flight_records = []
+    def setUpTestData():
         for company in AIRCARTS_COMPANIES:
-            self.companies.append(AircartCompany.objects.create(name=company["name"]))
+            AircartCompany.objects.create(name=company["name"])
         for aircart in AIRCARTS:
-            self.aircarts.append(Aircart.objects.create(number=aircart["number"], \
-                                                company=self.companies[aircart["company_id"]-1] \
-                                            ))
+            Aircart.objects.create(number=aircart["number"], \
+                                    company=AircartCompany.objects.get(id=aircart["company_id"]) \
+                                    )
         for flight_record in AIRCARTS_FLIGHT_RECORDS:
-            self.flight_records.append(AircartFlightRecord.objects.create(date=date(flight_record["date"]["year"],flight_record["date"]["mouth"],flight_record["date"]["day"]), \
-                                                        aircart=self.aircarts[flight_record["aircart_id"]-1], \
+            AircartFlightRecord.objects.create(date=date(flight_record["date"]["year"],flight_record["date"]["mouth"],flight_record["date"]["day"]), \
+                                                        aircart=Aircart.objects.get(id=flight_record["aircart_id"]), \
                                                         count=flight_record["count"] \
-                                                    ))
+                                                    )
     def test_get_aircart(self):
-        for id in range(len(self.aircarts)):
-            self.assertEqual(Aircart.objects.get(id=id+1), self.aircarts[id])
+        for id in range(len(AIRCARTS)):
+            self.assertEqual(str(Aircart.objects.get(id=id+1)), AIRCARTS[id]["number"])
     
     def test_get_aircart_company(self):
-        for id in range(len(self.companies)):
-            self.assertEqual(AircartCompany.objects.get(id=id+1), self.companies[id])
+        for id in range(len(AIRCARTS_COMPANIES)):
+            self.assertEqual(str(AircartCompany.objects.get(id=id+1)), AIRCARTS_COMPANIES[id]["name"])
     
     def test_get_flight_record(self):
-        for id in range(len(self.flight_records)):
-            self.assertEqual(AircartFlightRecord.objects.get(id=id+1), self.flight_records[id])
+        for id in range(len(AIRCARTS_FLIGHT_RECORDS)):
+            self.assertEqual(str(AircartFlightRecord.objects.get(id=id+1)), str(date(AIRCARTS_FLIGHT_RECORDS[id]["date"]["year"],\
+                AIRCARTS_FLIGHT_RECORDS[id]["date"]["mouth"],\
+                AIRCARTS_FLIGHT_RECORDS[id]["date"]["day"])))
