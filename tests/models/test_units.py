@@ -16,10 +16,8 @@ class UnitModelsTests(TestCase):
         for creator in UNIT_CREATORS:
             UnitCreator.objects.create(name=creator["name"])
         for unit in UNITS:
-            print(unit["creator_id"])
             Unit.objects.create(number=unit["number"], \
-                                manufacturer=UnitCreator.objects.get(id=unit["creator_id"]) \
-                                            )
+                                manufacturer=UnitCreator.objects.get(id=unit["creator_id"]))
         for action in UNIT_ACTIONS:
             UnitAction.objects.create(date=date(action["date"]["year"],action["date"]["mouth"],action["date"]["day"]), \
                                                         unit=Unit.objects.get(id=action["unit_id"]), \
