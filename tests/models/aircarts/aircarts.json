@@ -1,0 +1,10 @@
+[
+    {
+        "number": "Number one",
+        "company_id": 2
+    },
+    {
+        "number": "Second number",
+        "company_id": 1
+    }
+]
