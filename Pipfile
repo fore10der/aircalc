@@ -13,6 +13,7 @@ numpy = "*"
 python-dateutil = "*"
 django-login-required = "*"
 psycopg2-binary = "*"
+gunicorn = "==19.9.0"
 
 [requires]
 python_version = "3.7"
