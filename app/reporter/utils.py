@@ -7,11 +7,16 @@ import io
 import base64
 from django.db.models import Sum
 from units.models import UnitAction, Unit, UnitCreator
-from aircarts.models import PlaneFlightHours, Plane, PlaneCompany
+from aircarts.models import AircartFlightRecord, Aircart, AircartCompany
 import datetime
 from dateutil.rrule import rrule, MONTHLY
 from dateutil.relativedelta import relativedelta
 from xhtml2pdf import pisa
+from gss.settings.base import STATICFILES_DIRS
+import os
+
+def fetch_resources(uri,rel):
+    return os.path.join(STATICFILES_DIRS[0], uri)
 
 #Функция принимает начальные и конечные даты для составления отчета, id компаний и "окно" для под
 def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), companies_ids=[1,2,3], window_value = 3):
@@ -31,15 +36,15 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     X_count = len(dates)
     #Несколько запросов к бд для последующего формирования датасетов
     #Запрошенные компании
-    requested_companies = PlaneCompany.objects.filter(id__in=companies_ids)
+    requested_companies = AircartCompany.objects.filter(id__in=companies_ids)
     #Самолеты запрошенных компаний
-    requested_planes = Plane.objects.filter(company__in=requested_companies)
+    requested_aircarts = Aircart.objects.filter(company__in=requested_companies)
     #Все (?) блоки из бд
     total_units = Unit.objects.all()
     #Все производители блоков
     total_manufacturers = UnitCreator.objects.all()
     #Все факты занесения статистики об времени полета для выбранных самолетов
-    total_fh = PlaneFlightHours.objects.filter(plane__in=requested_planes)
+    total_fh = AircartFlightRecord.objects.filter(aircart__in=requested_aircarts)
     #Все факты занесения статистики об removals/failures за весь период с учетом окна
     total_removals = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=0)
     total_failures = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=1)
@@ -71,7 +76,7 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     for requested_company in requested_companies:
         companies_stats["fh_stats"].append({
             "board_number": requested_company.name,
-            "value": total_fh.filter(plane__in=requested_planes.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
+            "value": total_fh.filter(aircart__in=requested_aircarts.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
         })
     #Считаем суммарное fh для всех самолетов всех компаний
     companies_stats["total_fh"] = sum([fh_stat["value"] for fh_stat in companies_stats["fh_stats"]])
@@ -120,7 +125,7 @@ def build_report(context):
 
     # Создаем с последующей выдачей юзверю
     pisaStatus = pisa.CreatePDF(
-       html, dest=response)
+       html, dest=response, link_callback=fetch_resources)
     # Проверяем ошибки
     print(pisaStatus.err)
     if pisaStatus.err:

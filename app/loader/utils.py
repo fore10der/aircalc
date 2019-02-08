@@ -2,7 +2,7 @@ import numpy as np
 from matplotlib.dates import date2num, num2date
 from openpyxl import load_workbook
 from units.models import Unit, UnitCreator, UnitAction
-from aircarts.models import Plane, PlaneCompany, PlaneFlightHours
+from aircarts.models import Aircart, AircartCompany, AircartFlightRecord
 from django.db.models import F, Sum
 
 #Извлекаем контент из xlsx
@@ -37,18 +37,18 @@ def store_to_db(data):
             #Сохраняем FH
             for leaf_row in leaf_content:
                 #Проверяем на создание компанию
-                source = PlaneCompany.objects.get_or_create(name=leaf_row['source'])
+                source = AircartCompany.objects.get_or_create(name=leaf_row['source'])
                 #Проверяем на создание самолет
-                obj = Plane.objects.get_or_create(company=source[0], number=leaf_row['name'])
+                obj = Aircart.objects.get_or_create(company=source[0], number=leaf_row['name'])
                 #Идем по статистике
                 for event in leaf_row['statistic']:
                     #Проверка на пустоту статистики
                     if event[1]!=0:
                         #Проверка на наличие в базе
-                        if PlaneFlightHours.objects.filter(plane=obj[0], date=num2date(event[0])).exists():
-                            PlaneFlightHours.objects.update_or_create(plane=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
+                        if AircartFlightRecord.objects.filter(aircart=obj[0], date=num2date(event[0])).exists():
+                            AircartFlightRecord.objects.update_or_create(aircart=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
                         else:
-                            PlaneFlightHours.objects.create(plane=obj[0], date=num2date(event[0]), count=event[1])
+                            AircartFlightRecord.objects.create(aircart=obj[0], date=num2date(event[0]), count=event[1])
         else:
             #Заполняем статистику для блоков
             for leaf_row in leaf_content:

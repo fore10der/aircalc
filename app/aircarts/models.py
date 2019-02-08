@@ -1,7 +1,7 @@
 from django.db import models
 
 #Компания производитель воздушного судна
-class PlaneCompany(models.Model):
+class AircartCompany(models.Model):
 
     name = models.CharField(max_length=16)
 
@@ -9,21 +9,21 @@ class PlaneCompany(models.Model):
         return self.name
 
 #Воздушное судно
-class Plane(models.Model):
+class Aircart(models.Model):
     #Номер воздушного судна
     number = models.CharField(max_length=16)
     #Компания производитель
-    company = models.ForeignKey(PlaneCompany,on_delete=models.CASCADE)
+    company = models.ForeignKey(AircartCompany,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.board_number
+        return self.number
 
 #Часы полета воздуного судна
-class PlaneFlightHours(models.Model):
+class AircartFlightRecord(models.Model):
     #Дата полета
     date = models.DateField()
     #ВС
-    plane = models.ForeignKey(Plane, on_delete=models.CASCADE)
+    aircart = models.ForeignKey(Aircart, on_delete=models.CASCADE)
     #Часов в полете
     count = models.PositiveIntegerField(default=0)
 
