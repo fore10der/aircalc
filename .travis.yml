@@ -10,5 +10,6 @@ before_script:
   - psql -c 'create database travisci;' -U postgres
   - python app/manage.py makemigrations --settings=gss.settings.ci
   - python app/manage.py migrate --settings=gss.settings.ci
+  - python app/manage.py initgroups --settings=gss.settings.ci
 script:
   - pytest
