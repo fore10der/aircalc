@@ -1,8 +1,6 @@
 from django.test import TestCase
-import json
 from datetime import date
 from aircarts.models import Aircart, AircartCompany, AircartFlightRecord
-import os
 
 class AircartsModelsTests(TestCase):
     def setUpTestData():
