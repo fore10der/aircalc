@@ -15,7 +15,7 @@ class UnitModelsTests(TestCase):
     def setUpTestData():
         UnitCreator.objects.create(name="foo")
         Unit.objects.create(number='jjggh', \
-                    manufacturer=UnitCreator.objects.get(id=0))
+                    manufacturer=UnitCreator.objects.get(id=2))
         # for creator in UNIT_CREATORS:
         #     UnitCreator.objects.create(name=creator["name"])
         # for unit in UNITS:
