@@ -12,4 +12,4 @@ before_script:
   - python manage.py makemigrations --settings=gss.settings.ci
   - python manage.py migrate --settings=gss.settings.ci
 script:
-  - pytest
+  - cd .. && pytest
