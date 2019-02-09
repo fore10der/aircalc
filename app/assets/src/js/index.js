@@ -1,1 +1,1 @@
-console.log('хуйсасня')
+import "./dropzoneloader.js";
