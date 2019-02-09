@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'loader',
     'reporter',
     'units',
-    'aircarts',
-    'login_required'
+    'aircarts'
 ]
 
 REST_FRAMEWORK = {
