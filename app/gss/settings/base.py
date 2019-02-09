@@ -105,7 +105,7 @@ LOGIN_URL = "/login/"
 
 LOGOUT_REDIRECT_URL = "/logout/"
 
-LOGIN_REDIRECT_URL = 'loader'
+LOGIN_REDIRECT_URL = 'redirect'
 
 LANGUAGE_CODE = 'ru-ru'
 

@@ -26,7 +26,22 @@ services:
     - 1337:80
     depends_on:
     - web
+  portainer:
+    image: portainer/portainer
+    ports:
+      - "9000"
+    networks:
+      - portainer-net
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
 
 volumes: 
   static_volume:
   media_volume:
+networks:
+  portainer-net:
