@@ -11,7 +11,7 @@ xhtml2pdf = "*"
 matplotlib = "*"
 numpy = "*"
 python-dateutil = "*"
-django-login-required = "*"
+djangorestframework = "*"
 psycopg2-binary = "*"
 gunicorn = "==19.9.0"
 

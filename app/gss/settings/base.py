@@ -26,6 +26,7 @@ SECRET_KEY = 'wqm&6u%7x&7a$z7b8v-h5p(5+cjf$@l02fn+u-jrkl+fn2ul*m'
 ALLOWED_HOSTS = ['*']
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -35,13 +36,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'webpack_loader',
     'gss',
+    'api',
     'loader',
+    'reporter',
     'units',
     'aircarts',
     'login_required'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'login_required.middleware.LoginRequiredMiddleware',
+    'gss.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -101,9 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-LOGIN_URL = "/login/"
+LOGIN_URL = "/"
 
-LOGOUT_REDIRECT_URL = "/logout/"
+LOGOUT_REDIRECT_URL = "login"
 
 LOGIN_REDIRECT_URL = 'redirect'
 
@@ -131,4 +144,13 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/media/'
 
+REPORT_PATH = 'reports/'
+
+SOURCE_PATH = 'sources/'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# LOGIN_EXEMPT_URLS = [
+#         "/api/uploads/",
+#         "/api/reports/"
+# ]
