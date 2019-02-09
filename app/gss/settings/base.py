@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'gss',
     'loader',
+    'reporter',
     'units',
     'aircarts',
     'login_required'
