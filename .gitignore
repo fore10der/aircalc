@@ -118,6 +118,8 @@ dmypy.json
 
 static/*
 media/*
+reports/*
+sources/*
 
 # vscode
 .vscode/
