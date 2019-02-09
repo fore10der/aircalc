@@ -7,11 +7,13 @@ from .utils import anonymous_required
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', anonymous_required(auth_views.LoginView.as_view()), name='login'),
+    path('api/',include('api.urls')),
+    path('', anonymous_required(auth_views.LoginView.as_view()), name='login'),
     path('logout/', auth_views.LogoutView.as_view(),{'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     path('upload/', include('loader.urls')),
     path('report/',include('reporter.urls')),
     path('error/',views.AccessDeniedTemplate.as_view(),name='error'),
-    re_path(r'^.*', views.redirect, name='redirect')
+    path('redirect/', views.redirect, name='redirect')
 ]
 
+handler404 = views.redirect
