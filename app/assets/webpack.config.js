@@ -110,10 +110,6 @@ module.exports = {
         to: "./favicon"
       },
       {
-        from: "./src/img",
-        to: "./"
-      },
-      {
         from: "./src/uploads",
         to: "./uploads"
       }
