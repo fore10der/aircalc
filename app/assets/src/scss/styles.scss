@@ -1,0 +1,17 @@
+$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", Futura,sans-serif;
+
+@font-face { 
+  font-family: "Futura";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Futura.ttf);
+}
+
+body {
+	background: #f1ebfb; 
+	font-family: "Futura";
+}
+
+@import url(login.scss);
+@import url(upload.scss);
+@import url(report.scss);

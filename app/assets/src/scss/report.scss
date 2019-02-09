@@ -1,0 +1,270 @@
+$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", Futura,sans-serif;
+
+@font-face { 
+  font-family: "Futura";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Futura.ttf);
+}
+ 
+.header {
+  background-color: #ffffff;
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.header .central_link {
+  margin-right: 200px;
+  margin-left: 200px;
+}
+
+.header a {
+  font-family: "Futura", sans-serif;
+  color: rgba(142, 142, 245, 0.4);
+  width: 84px;
+  height: 21px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+
+.report_form {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 65px;
+  margin-bottom: auto;
+	width: 940px;
+	height: 200px;
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+}
+
+.report_form_name {
+	width: 248px;
+	margin-left: 190px;
+	position: absolute;
+	margin-top: 38px;
+	border-radius: 8px;
+	padding-left: 20px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+}
+
+.report_form_name_title {
+	height: 14px;
+	color: #4a90e2;
+	color: rgba(44, 51, 86, 0.2);
+	font-family: "Futura", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	padding-bottom: 3px;
+}
+
+.report_form_name_input input{
+	color: #d5d6dd;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+	background-color: #ffffff;
+	border: 0;	
+  box-sizing: border-box;
+  padding-right: 138px;
+  padding-bottom: 4px;
+  width: 240px;
+}
+
+.report_form_date {
+	width: 248px;
+	margin-left: 480px;
+	position: absolute;
+	margin-top: 38px;
+	border-radius: 8px;
+	padding-left: 20px;
+	margin-right: 211px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);	
+}
+
+.report_form_date_title {
+	height: 14px;
+	color: #4a90e2;
+	color: rgba(44, 51, 86, 0.2);
+	font-family: "Futura", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	padding-bottom: 3px;
+}
+
+.report_form_date_input input{
+	color: #d5d6dd;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	width: 100px;
+	letter-spacing: -0.28px;
+	background-color: #ffffff;
+	border: 0;	
+ 	box-sizing: border-box;
+  padding-bottom: 4px;
+}
+.report_form_date_input span {
+	color: #d5d6dd;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+
+.report_form_date_input hr {
+	width: 213px;
+	height: 0;
+	border: 1px solid rgba(151, 151, 151, 0.1);
+	margin-left: 0px;
+	margin-bottom: 13px;
+}
+
+.report_form_name_input hr {
+	width: 230px;
+	height: 0;
+	border: 1px solid rgba(151, 151, 151, 0.1);
+	margin-left: 0px;
+	margin-bottom: 13px;
+}
+
+.report_form button {
+	width: 300px;
+	height: 31px;
+	background-color: #d2a6ff;
+	opacity: 0.7;
+	border-radius: 10px;
+	margin-left: 320px;
+	margin-top: 142px;
+	color: #ffffff;
+	font-size: 16px;
+	font-weight: 500;
+	font-family: "Futura",sans-serif;
+}
+
+.report_history{
+	margin-left: 170px;
+  width: 940px;
+	height: auto;
+	margin-top: 45px;
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.report_history_title{
+	padding-left: 90px;
+	padding-top: 22px;
+	padding-bottom: 24px;
+	color: #565e77;
+	font-family: "Futura", sans-serif;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+.report_history_record {
+	width: 760px;
+	height: 155px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	border-radius: 8px;
+	background-color: #ffffff;
+	margin-left: 90px;
+	margin-right: 90px;
+	margin-bottom: 25px;
+}
+
+.report_history_record a {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-decoration: none;
+    color: initial;
+}
+
+.report_history_record_titles {
+	padding-top: 15px;
+}
+.report_history_record_right_title {
+	padding-left: 333px;
+	padding-right: 60px;
+}
+.report_history_record_left_title{
+	padding-left: 31px;
+}
+.report_history_record_date_right_title {
+	padding-left: 325px;
+}
+.report_history_record_date_left_title{
+	padding-left: 31px;
+}
+.report_history_record_right_title{
+	padding-right: 60px;
+}
+.report_history_record_titles span {
+	color: #4a90e2;
+	font-family: "Futura", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	color: rgba(44, 51, 86, 0.2);
+}
+.report_history_record_date_titles span {
+	color: #4a90e2;
+	font-family: "Futura", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	color: rgba(44, 51, 86, 0.2);
+}
+.report_history_record_info {
+padding-top: 6px;
+}
+.report_history_record_info {
+padding-top: 6px;
+}
+
+.report_history_record_info span {
+	color: #565c78;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+.report_history_record_date_info span {
+	color: #565c78;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+
+.report_history_record_info_left_title{
+padding-left: 31px;
+}
+.report_history_record_info_right_title {
+padding-left: 310px;
+padding-right: 117px;
+}
+
+.report_history_record_info_date_left_title{
+padding-left: 31px;
+}
+.report_history_record_info_date_right_title {
+padding-left: 170px;
+padding-right: 50px;
+}
+
+.report_history_record_underlines hr {
+	border: 1px solid rgba(151, 151, 151, 0.1);
+	height: 1px;
+}
+
+.report_history_record_underlines_left_line{
+	margin-left: 32px;
+	margin-right: 6px;
+}

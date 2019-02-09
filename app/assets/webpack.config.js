@@ -1,47 +1,34 @@
-const path = require("path");
-const fs = require("fs");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
+const fs = require("fs");
+const path = require('path')
 
-//function generateHtmlPlugins(templateDir) {
-//  const templateFiles = fs.readdirSync(path.resolve(__dirname, templateDir));
- // return templateFiles.map(item => {
-   // const parts = item.split(".");
-    //const name = parts[0];
-    //const extension = parts[1];
-   // return new HtmlWebpackPlugin({
-     // filename: `${name}.html`,
-      //template: path.resolve(__dirname, `${templateDir}/${name}.${extension}`),
-      //inject: false
-    //});
-  //});
-//}
-const htmlPlugins = new HtmlWebpackPlugin({
-filename: "./index.html",
-template: "./index.html",
-inject: false});
-//generateHtmlPlugins("./src/html/views");
-
-const config = {
-  entry: ["./src/js/index.js", "./src/scss/style.scss"],
-  output: {
-    filename: "./js/bundle.js"
-  },
-  devtool: "source-map",
-  mode: "production",
-  optimization: {
-    minimizer: [
-      new TerserPlugin({
-        sourceMap: true,
-        extractComments: true
-      })
-    ]
-  },
-  module: {
-    rules: [
+module.exports = {
+    entry: [
+        "./src/js/index.js", "./src/scss/styles.scss" 
+    ],
+    output : {
+        filename : 'bundle.js',
+        path : path.resolve(__dirname, 'dist')
+    },
+    module: {
+        rules: [
+        {
+            test: /\.(png|jpg)$/,
+            loader: 'file-loader'
+        },
+        {
+            test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+            use: [{
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                    outputPath: 'fonts/'
+                }
+            }]
+        },
       {
         test: /\.(sass|scss)$/,
         include: path.resolve(__dirname, "src/scss"),
@@ -83,12 +70,35 @@ const config = {
             }
           }
         ]
-      }
-    ]
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: "./style.bundle.css"
+      },
+        {
+            test: /\.(js|jsx)$/,
+            exclude: /node_modules/,
+            use: {
+            loader: "babel-loader"
+            }
+        },
+        {
+            test: /\.html$/,
+            use: [
+            {
+                loader: "html-loader"
+            }
+            ]
+        }
+        ]
+    },
+    devServer: {
+        historyApiFallback: true,
+        // host: '0.0.0.0',//your ip address
+        // port: 8080,
+    },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
+    plugins: [
+        new MiniCssExtractPlugin({
+      filename: "./styles.bundle.css"
     }),
     new CopyWebpackPlugin([
       {
@@ -107,13 +117,10 @@ const config = {
         from: "./src/uploads",
         to: "./uploads"
       }
-    ])
-  ].concat(htmlPlugins)
-};
-
-module.exports = (env, argv) => {
-  if (argv.mode === "production") {
-    config.plugins.push(new CleanWebpackPlugin("dist"));
-  }
-  return config;
+    ]),
+        new HtmlWebPackPlugin({
+        template: "./src/upload.html",
+        filename: "./index.html"
+        })
+    ]
 };

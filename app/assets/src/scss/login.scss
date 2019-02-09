@@ -8,12 +8,14 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 }
 
 
-body {/* fallback for old browsers */
+.login-wrapper {
+width: 100%;
+height: 100vh;
 background-color: #f1ebfb;
 background-image: url(Vector_picture.png);
 background-size: 35%;
 background-repeat: no-repeat;
-background-position: right top 80%;
+background-position: right top 40%;
 }
 
 
@@ -21,10 +23,10 @@ background-position: right top 80%;
   padding: 8% 0 0;
   margin: auto;
   width: 372px;
-  height: 382px;
+  height: 382px; 
 }
 
-.form {
+.login-form {
   position: relative;
   background: #FFFFFF;
   padding-left: 21px;
@@ -33,7 +35,7 @@ background-position: right top 80%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-.form input {
+.login-form input {
   font-family: "Futura", sans-serif;
   width: 86px;
   height: 30px;
@@ -46,7 +48,7 @@ background-position: right top 80%;
   font-size: 14px;
 }
 
-.form p {
+.login-form p {
   width: 46px;
   height: 22px;
   color: rgba(44, 51, 86, 0.8);
@@ -55,13 +57,13 @@ background-position: right top 80%;
   padding-top: 25px;
 }
 
-.form hr {
+.login-form hr {
   margin-right: 20px;
   padding-left: 22px;
   border: 1px solid rgba(151, 151, 151, 0.1);
 }
 
-.form button {
+.login-form button {
   font-family: "Futura", sans-serif;
   background-color: #dfd9ff;
   width: 300px;
@@ -76,9 +78,3 @@ background-position: right top 80%;
   margin: 26px 27px 21px 16px;
   box-shadow: none;
 }
-
-
-
-  
-
-

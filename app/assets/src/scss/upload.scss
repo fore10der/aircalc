@@ -1,0 +1,168 @@
+$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", Futura,sans-serif;
+
+@font-face { 
+  font-family: "Futura";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../fonts/Futura.ttf);
+}
+
+
+ 
+.header {
+  background-color: #ffffff;
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.header .central_link {
+  margin-right: 200px;
+  margin-left: 200px;
+}
+
+.header a {
+  font-family: "Futura", sans-serif;
+  color: rgba(142, 142, 245, 0.4);
+  width: 84px;
+  height: 21px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 14px;
+  text-align: center;
+  text-decoration: none;
+}
+
+
+
+.upload{
+	padding-top: 65px;
+  margin: auto;
+	width: 940px;
+	height: 400px;
+}
+
+.form_around {
+	width: 940px;
+	height: 400px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	border-radius: 16px;
+	background-color: #ffffff;
+}
+.form {
+	width: 825px;
+	height: 310px;
+  position: absolute;
+  background: #FFFFFF;
+  text-align: center;
+  border: 2px solid #a4cffc;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-left: 58px;
+  margin-right: 57px;
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+
+.upload_form button {
+	padding-top: 116px;
+	padding-bottom: 45px;
+	box-shadow: none;
+	border: 0;
+	background-color: #FFFFFF;
+	cursor:pointer;
+}
+
+.upload_form p{
+	font-family: "Futura", sans-serif;
+	padding-bottom: 48px;
+	color: #cdcdcd;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+.upload_history{
+  width: 940px;
+	height: auto;
+	margin-top: 25px;
+  position: absolute;
+  background: #FFFFFF;
+  border-radius: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.upload_history_title{
+	padding-left: 90px;
+	padding-top: 22px;
+	color: #565e77;
+	font-family: "Futura", sans-serif;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+.upload_history_record {
+	width: 760px;
+	height: 76px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+	border-radius: 8px;
+	background-color: #ffffff;
+	margin-left: 90px;
+	margin-right: 90px;
+	margin-bottom: 25px;
+}
+.upload_history_record a {
+	    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    text-decoration: none;
+    color: initial;
+}
+
+.upload_history_record_titles {
+padding-top: 15px;
+}
+.upload_history_record_central_title {
+	padding-left: 333px;
+	padding-right: 148px;
+}
+.upload_history_record_left_title{
+	padding-left: 31px;
+}
+.upload_history_record_right_title{
+	padding-right: 60px;
+}
+.upload_history_record_titles span {
+	color: #4a90e2;
+	font-family: "Futura", sans-serif;
+	font-size: 10px;
+	font-weight: 500;
+	color: rgba(44, 51, 86, 0.2);
+}
+.upload_history_record_info {
+padding-top: 6px;
+}
+
+.upload_history_record_info span {
+	color: #565c78;
+	font-family: "Futura", sans-serif;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+
+.upload_history_record_info_left_title{
+padding-left: 31px;
+}
+.upload_history_record_info_central_title {
+padding-left: 310px;
+padding-right: 117px;
+}
+
+.upload_history_record_underlines hr {
+	border: 1px solid rgba(151, 151, 151, 0.1);
+	height: 1px;
+}
+
+.upload_history_record_underlines_left_line{
+	margin-left: 32px;
+	margin-right: 6px;
+}
