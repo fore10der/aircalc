@@ -12,6 +12,6 @@ class UploadFileView(FormMixin,ListView):
     form_class = TestFileForm
     success_url = '/'
     
-    def form_valid(self, form):
+    def post(self, form):
         data = preprocess_xlsx(self.request.FILES['file_input'])
         store_to_db(data)

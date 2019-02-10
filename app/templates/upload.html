@@ -4,10 +4,15 @@
 	<div class="upload">
 	<div class="form_around">
   <div class="form">
-    <form class="upload_form">
+	<form enctype="multipart/form-data" action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+    {% comment %} <form class="upload_form">
     	<button><img src="img/Clip_2.png" alt=""></button>
       <p>Please, transfer the working file</p>
-    </form>
+    </form> {% endcomment %}
   </div>
   </div>
   <div class="upload_history">

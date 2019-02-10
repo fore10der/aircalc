@@ -116,7 +116,7 @@ def build_plots(unit_stats, dates):
 #Загружаем pdf
 def build_report(context):
     #Из html
-    template_path = 'report.html'
+    template_path = 'pdf_report.html'
     response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="report.pdf"'
     # Находим и рендерим в переменную
