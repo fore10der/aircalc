@@ -110,18 +110,18 @@ def build_report(context,docinfo):
     # Находим и рендерим в переменную
     template = get_template(template_path)
     html = template.render(context)
-    a
     # Создаем с последующей выдачей юзверю
     pisaStatus = pisa.CreatePDF(
-       html, dest=a, link_callback=fetch_resources)
+       html, dest=response, link_callback=fetch_resources)
     # Проверяем ошибки
     print(pisaStatus.err)
     if pisaStatus.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    ReportedFile.objects.create(file=pisaStatus, \
-        reporter=docinfo["creator"], \
-        report_date_start=docinfo["report_date_start"], \
-        report_date_end=docinfo["report_date_end"])
+       # TODO Repair
+    # ReportedFile.objects.create(file=pisaStatus, \
+    #     reporter=docinfo["creator"], \
+    #     report_date_start=docinfo["report_date_start"], \
+    #     report_date_end=docinfo["report_date_end"])
     return response
 
 #Функция для форматирования даты для отображения в pdf (см заголовок левой таблицы)
