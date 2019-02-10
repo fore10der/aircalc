@@ -7,16 +7,18 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.urls import reverse
 
-
 class UploadFileView(FormMixin,ListView):
     queryset = UploadedFile.objects.order_by('-upload_date')
     template_name = 'upload.html'
     context_object_name = 'uploads'
     form_class = TestFileForm
-    success_url = '/'
     
     def post(self, form):
-        data = preprocess_xlsx(self.request.FILES['file_input'])
+        file = self.request.FILES['file_input']
+        data = preprocess_xlsx(file)
         store_to_db(data)
-        UploadedFile.objects.create(file=self.request.FILES['file_input'],uploader=self.request.user.username)
-        return HttpRequest(reverse('loader'))
+        UploadedFile.objects.create(file=file,uploader=self.request.user.username)
+        return self.form_valid(form)
+        
+    def form_valid(self, form):
+        return super().form_valid(form)

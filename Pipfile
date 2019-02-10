@@ -5,7 +5,6 @@ verify_ssl = true
 
 [packages]
 django = "*"
-django-webpack-loader = "*"
 openpyxl = "*"
 xhtml2pdf = "*"
 matplotlib = "*"
@@ -14,8 +13,6 @@ python-dateutil = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 gunicorn = "==19.9.0"
-pandas = "*"
-xlrd = "*"
 
 [requires]
 python_version = "3.7"

@@ -16,12 +16,14 @@ from gss.settings.base import STATICFILES_DIRS
 import os
 
 def fetch_resources(uri,rel):
-    return os.path.join(STATICFILES_DIRS[0], uri)
+    return os.path.join(STATICFILES_DIRS[1], uri)
 
 #Функция принимает начальные и конечные даты для составления отчета, id компаний и "окно" для под
-def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datetime(2018,12,1), companies_ids=[1,2,3], window_value = 3):
+def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None):
+    start_date = datetime.datetime.strptime(start_date_str,'%Y-%m-%d')
+    end_date = datetime.datetime.strptime(end_date_str,'%Y-%m-%d')
     #Формирование id всех блоков из БД
-    units_ids = list(Unit.objects.all().values_list('id', flat=True))
+    units = Unit.objects.all()
     #Объявление окна
     mouth_eps = relativedelta(months=window_value)
     #Формирование оси X для графика - месяцев в промежутке от start_date до end_date
@@ -36,7 +38,7 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     X_count = len(dates)
     #Несколько запросов к бд для последующего формирования датасетов
     #Запрошенные компании
-    requested_companies = AircartCompany.objects.filter(id__in=companies_ids)
+    requested_companies = AircartCompany.objects.all() if companies_ids is None else AircartCompany.objects.filter(id__in=companies_ids)
     #Самолеты запрошенных компаний
     requested_aircarts = Aircart.objects.filter(company__in=requested_companies)
     #Все (?) блоки из бд
@@ -49,19 +51,18 @@ def get_data(start_date = datetime.datetime(2017,1,1), end_date = datetime.datet
     total_removals = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=0)
     total_failures = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=1)
     #Для каждого блока
-    for unit_id in units_ids:
-        #Выбираем из бд
-        unit = total_units.get(id=unit_id)
+    for unit in units:
         #определяем начальные значения вектора removals/failtures
         removals_stat = np.zeros(X_count)
         failures_stat = np.zeros(X_count)
         #Заполняем вектора
         for i in np.arange(X_count):
-            removals = total_removals.filter(unit=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
-            failures = total_failures.filter(unit=unit_id, date__range=[dates[i]-mouth_eps,dates[i]]).count()
+            removals = total_removals.filter(unit=unit, date__range=[dates[i]-mouth_eps,dates[i]]).count()
+            failures = total_failures.filter(unit=unit, date__range=[dates[i]-mouth_eps,dates[i]]).count()
             fh = total_fh.filter(date__range=[dates[i]-mouth_eps,dates[i]]).aggregate(Sum("count"))['count__sum']
-            removals = removals if removals!=0 else np.inf
-            failures = failures if failures!=0 else np.inf
+            removals = removals if removals else np.inf
+            failures = failures if failures else np.inf
+            fh = fh if fh else 0
             #Основная формула
             removals_stat[i] = fh/removals
             failures_stat[i] = fh/failures
@@ -114,11 +115,11 @@ def build_plots(unit_stats, dates):
     return units_plots
 
 #Загружаем pdf
-def build_report(context):
+def build_report(context,docname):
     #Из html
     template_path = 'pdf_report.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    response['Content-Disposition'] = 'attachment; filename="{0}.pdf"'.format(docname)
     # Находим и рендерим в переменную
     template = get_template(template_path)
     html = template.render(context)

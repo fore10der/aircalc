@@ -137,6 +137,7 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets","dist"),
+    os.path.join(BASE_DIR, "assets")
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
@@ -148,8 +149,3 @@ REPORT_PATH = 'reports/'
 SOURCE_PATH = 'sources/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# LOGIN_EXEMPT_URLS = [
-#         "/api/uploads/",
-#         "/api/reports/"
-# ]

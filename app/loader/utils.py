@@ -17,13 +17,14 @@ def preprocess_xlsx(filename):
         'Induced': ['name', 'source', 'statistic']}
     for key in wb.get_sheet_names():
         main_dict = []
-        for i in np.arange(wb.get_sheet_by_name(key).min_row + 1, wb.get_sheet_by_name(key).max_row):
+        current_wb = wb[key]
+        for i in np.arange(current_wb.min_row + 1, current_wb.max_row):
             buff_dict = {}
-            stat_dict = np.matrix([[date2num(wb.get_sheet_by_name(key).cell(row=wb.get_sheet_by_name(key).min_row, column=j).value),
-                                    wb.get_sheet_by_name(key).cell(row=i, column=j).value if wb.get_sheet_by_name(key).cell(row=i, column=j).value != None else 0
-                                    ] for j in np.arange(wb.get_sheet_by_name(key).min_column + 2, wb.get_sheet_by_name(key).max_column)])
-            buff_dict[ll[key][0]] = wb.get_sheet_by_name(key).cell(row=i, column=1).value
-            buff_dict[ll[key][1]] = wb.get_sheet_by_name(key).cell(row=i, column=2).value
+            stat_dict = np.matrix([[date2num(current_wb.cell(row=current_wb.min_row, column=j).value),
+                                   current_wb.cell(row=i, column=j).value if current_wb.cell(row=i, column=j).value != None else 0
+                                    ] for j in np.arange(current_wb.min_column + 2, current_wb.max_column)])
+            buff_dict[ll[key][0]] = current_wb.cell(row=i, column=1).value
+            buff_dict[ll[key][1]] = current_wb.cell(row=i, column=2).value
             buff_dict[ll[key][2]] = np.array(stat_dict)
             main_dict.append(buff_dict)
             main[key] = main_dict
@@ -43,7 +44,7 @@ def store_to_db(data):
                 #Идем по статистике
                 for event in leaf_row['statistic']:
                     #Проверка на пустоту статистики
-                    if event[1]!=0:
+                    if event[1]:
                         #Проверка на наличие в базе
                         if AircartFlightRecord.objects.filter(aircart=obj[0], date=num2date(event[0])).exists():
                             AircartFlightRecord.objects.update_or_create(aircart=obj[0], date=num2date(event[0]), defaults={'count': F('count') + event[1]})
