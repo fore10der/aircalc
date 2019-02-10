@@ -20,6 +20,7 @@ services:
       - 8000
     depends_on:
       - db
+      - webpack
   db:
     image: postgres:11.1-alpine
   nginx:
