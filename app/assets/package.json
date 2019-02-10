@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "copy-webpack-plugin": "^4.6.0",
+    "dropzone": "^5.5.1",
     "normalize.css": "^8.0.1"
   }
 }

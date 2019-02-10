@@ -1,62 +1,39 @@
 {% extends 'base.html' %}
-
+{% load filename %}
 {% block content %}
 	<div class="upload">
 	<div class="form_around">
   <div class="form">
-    <form class="upload_form">
+	<form enctype="multipart/form-data" action="" method="POST">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+    {% comment %} <form class="upload_form">
     	<button><img src="img/Clip_2.png" alt=""></button>
       <p>Please, transfer the working file</p>
-    </form>
+    </form> {% endcomment %}
   </div>
   </div>
   <div class="upload_history">
   		<p class="upload_history_title">Upload History</p>
-  		<form class="upload_history_record">
-  			<a href="#"><div class="upload_history_record_titles">				
+		{% for upload in uploads %}
+		<div class="upload_history_record">
+  			<a href="{{upload.file.url}}"><div class="upload_history_record_titles">				
   				<span class="upload_history_record_left_title">Your name</span>
 					<span class="upload_history_record_central_title">File name</span>
 					<span class="upload_history_record_right_title">Create date</span>
 				</div>
 				<div class="upload_history_record_info">
-					<span class="upload_history_record_info_left_title">Full name</span>
-					<span class="upload_history_record_info_central_title">Myfile.xlsx</span>
-					<span class="upload_history_record_info_right_title">dd.mm.aaaa</span>
+					<span class="upload_history_record_info_left_title">{{upload.uploader}}</span>
+					<span class="upload_history_record_info_central_title">{{upload|filename}}</span>
+					<span class="upload_history_record_info_right_title">{{upload.upload_date}}</span>
 				</div>
 				<div class="upload_history_record_underlines">
 					<hr class="upload_history_record_underlines_left_line">
 				</div></a>
-  		</form>
-  		<form class="upload_history_record">
-  			<a href="#"><div class="upload_history_record_titles">				
-  				<span class="upload_history_record_left_title">Your name</span>
-					<span class="upload_history_record_central_title">File name</span>
-					<span class="upload_history_record_right_title">Create date</span>
-				</div>
-				<div class="upload_history_record_info">
-					<span class="upload_history_record_info_left_title">Full name</span>
-					<span class="upload_history_record_info_central_title">Myfile.xlsx</span>
-					<span class="upload_history_record_info_right_title">dd.mm.aaaa</span>
-				</div>
-				<div class="upload_history_record_underlines">
-					<hr class="upload_history_record_underlines_left_line">
-				</div></a>
-  		</form>
-  		<form class="upload_history_record">
-  			<a href="#"><div class="upload_history_record_titles">				
-  				<span class="upload_history_record_left_title">Your name</span>
-					<span class="upload_history_record_central_title">File name</span>
-					<span class="upload_history_record_right_title">Create date</span>
-				</div>
-				<div class="upload_history_record_info">
-					<span class="upload_history_record_info_left_title">Full name</span>
-					<span class="upload_history_record_info_central_title">Myfile.xlsx</span>
-					<span class="upload_history_record_info_right_title">dd.mm.aaaa</span>
-				</div>
-				<div class="upload_history_record_underlines">
-					<hr class="upload_history_record_underlines_left_line">
-				</div></a>
-  		</form>
+  		</div>
+		{% endfor %}
   </div>
 </div>
 {% endblock %}
