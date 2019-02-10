@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
+  webpack:
+    build: 
+      context: ./
+      dockerfile: ./docker/webpack/Dockerfile
+    volumes:
+      - assets_volume:/usr/src/app/assets/dist
   web:
     build:
       context: ./
@@ -8,12 +14,12 @@ services:
     volumes:
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
+      - assets_volume:/usr/src/app/assets/dist
     command: gunicorn gss.wsgi:application --bind 0.0.0.0:8000
     expose: 
       - 8000
     depends_on:
       - db
-      - frontend
   db:
     image: postgres:11.1-alpine
   nginx:
@@ -40,10 +46,9 @@ services:
       replicas: 1
       placement:
         constraints: [node.role == manager]
-  frontend:
-    
 
 volumes: 
+  assets_volume:
   static_volume:
   media_volume:
 networks:
