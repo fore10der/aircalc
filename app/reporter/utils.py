@@ -22,40 +22,25 @@ def fetch_resources(uri,rel):
 def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None):
     start_date = datetime.datetime.strptime(start_date_str,'%Y-%m-%d')
     end_date = datetime.datetime.strptime(end_date_str,'%Y-%m-%d')
-    #Формирование id всех блоков из БД
+    #Определение начальных переменных
     units = Unit.objects.all()
-    #Объявление окна
     mouth_eps = relativedelta(months=window_value)
-    #Формирование оси X для графика - месяцев в промежутке от start_date до end_date
     dates = list(rrule(MONTHLY, dtstart=start_date, until=end_date))
-    #Формирование листа статистики для блоков
     units_stats = list()
-    #Формирование словаря статистики для компаний, который содержит
-    #Список компаний с FH по всем их самолетам и суммарный FH по всем самолетам для всех компаний
     companies_stats = dict()
     companies_stats["fh_stats"] = list()
-    #Кол-во тиков для последующей оптимизации с помощью массивов numpy
     X_count = len(dates)
-    #Несколько запросов к бд для последующего формирования датасетов
-    #Запрошенные компании
     requested_companies = AircartCompany.objects.all() if companies_ids is None else AircartCompany.objects.filter(id__in=companies_ids)
-    #Самолеты запрошенных компаний
     requested_aircarts = Aircart.objects.filter(company__in=requested_companies)
-    #Все (?) блоки из бд
     total_units = Unit.objects.all()
-    #Все производители блоков
     total_manufacturers = UnitCreator.objects.all()
-    #Все факты занесения статистики об времени полета для выбранных самолетов
     total_fh = AircartFlightRecord.objects.filter(aircart__in=requested_aircarts)
-    #Все факты занесения статистики об removals/failures за весь период с учетом окна
     total_removals = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=0)
     total_failures = UnitAction.objects.filter(date__range=[start_date-mouth_eps,end_date], action_type=1)
-    #Для каждого блока
+    #Подсчет статистики за каждый месяц периода отчета по блокам
     for unit in units:
-        #определяем начальные значения вектора removals/failtures
         removals_stat = np.zeros(X_count)
         failures_stat = np.zeros(X_count)
-        #Заполняем вектора
         for i in np.arange(X_count):
             removals = total_removals.filter(unit=unit, date__range=[dates[i]-mouth_eps,dates[i]]).count()
             failures = total_failures.filter(unit=unit, date__range=[dates[i]-mouth_eps,dates[i]]).count()
@@ -63,23 +48,21 @@ def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None)
             removals = removals if removals else np.inf
             failures = failures if failures else np.inf
             fh = fh if fh else 0
-            #Основная формула
             removals_stat[i] = fh/removals
             failures_stat[i] = fh/failures
-        #Заполняем статистику блоков
+        #Заполние статистики
         units_stats.append({
             "number": unit.number,
             "supplier": unit.manufacturer.name,
             "removals": removals_stat,
             "failures": failures_stat
         })
-    #Заполняем таблицу компаний суммарным fh для каждого самолетов компании
+    #Подсчет и заполнение статистики для компаний
     for requested_company in requested_companies:
         companies_stats["fh_stats"].append({
             "board_number": requested_company.name,
             "value": total_fh.filter(aircart__in=requested_aircarts.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
         })
-    #Считаем суммарное fh для всех самолетов всех компаний
     companies_stats["total_fh"] = sum([fh_stat["value"] for fh_stat in companies_stats["fh_stats"]])
     #Функция возвращает статистику для компаний, блоков (для постройки графиков) и даты формирования отчета в виде массива
     return companies_stats, units_stats, dates
