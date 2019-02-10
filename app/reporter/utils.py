@@ -12,11 +12,13 @@ import datetime
 from dateutil.rrule import rrule, MONTHLY
 from dateutil.relativedelta import relativedelta
 from xhtml2pdf import pisa
-from gss.settings.base import STATICFILES_DIRS
+from gss.settings.base import MEDIA_ROOT
+from .models import ReportedFile
+
 import os
 
 def fetch_resources(uri,rel):
-    return os.path.join(STATICFILES_DIRS[1], uri)
+    return os.path.join(MEDIA_ROOT, uri)
 
 #Функция принимает начальные и конечные даты для составления отчета, id компаний и "окно" для под
 def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None):
@@ -59,9 +61,11 @@ def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None)
         })
     #Подсчет и заполнение статистики для компаний
     for requested_company in requested_companies:
+        value = total_fh.filter(aircart__in=requested_aircarts.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
+        value = value if value else 0
         companies_stats["fh_stats"].append({
             "board_number": requested_company.name,
-            "value": total_fh.filter(aircart__in=requested_aircarts.filter(company=requested_company), date__range=[start_date,end_date]).aggregate(Sum("count"))['count__sum']
+            "value": value
         })
     companies_stats["total_fh"] = sum([fh_stat["value"] for fh_stat in companies_stats["fh_stats"]])
     #Функция возвращает статистику для компаний, блоков (для постройки графиков) и даты формирования отчета в виде массива
@@ -98,22 +102,26 @@ def build_plots(unit_stats, dates):
     return units_plots
 
 #Загружаем pdf
-def build_report(context,docname):
+def build_report(context,docinfo):
     #Из html
     template_path = 'pdf_report.html'
     response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{0}.pdf"'.format(docname)
+    response['Content-Disposition'] = 'attachment; filename="{0}.pdf"'.format(docinfo["filename"])
     # Находим и рендерим в переменную
     template = get_template(template_path)
     html = template.render(context)
-
+    a
     # Создаем с последующей выдачей юзверю
     pisaStatus = pisa.CreatePDF(
-       html, dest=response, link_callback=fetch_resources)
+       html, dest=a, link_callback=fetch_resources)
     # Проверяем ошибки
     print(pisaStatus.err)
     if pisaStatus.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    ReportedFile.objects.create(file=pisaStatus, \
+        reporter=docinfo["creator"], \
+        report_date_start=docinfo["report_date_start"], \
+        report_date_end=docinfo["report_date_end"])
     return response
 
 #Функция для форматирования даты для отображения в pdf (см заголовок левой таблицы)

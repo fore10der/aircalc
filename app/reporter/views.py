@@ -19,7 +19,12 @@ class ReportFileView(FormMixin,ListView):
         return build_report({"companies_stats": companies_stats,
         "units_stats": unit_plots,
         "report_bounds": date_bounds},
-        self.request.POST["report_name"])
+        {
+            "filename": self.request.POST["report_name"],
+            "report_date_start": self.request.POST["report_date_start"],
+            "report_date_end": self.request.POST["report_date_end"],
+            "creator": self.request.user.username
+        })
 
 #Генерируем и собираем pdf
 def getpdf(request):

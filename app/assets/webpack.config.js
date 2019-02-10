@@ -105,14 +105,6 @@ module.exports = {
         from: "./src/fonts",
         to: "./fonts"
       },
-      {
-        from: "./src/favicon",
-        to: "./favicon"
-      },
-      {
-        from: "./src/uploads",
-        to: "./uploads"
-      }
     ]),
         new HtmlWebPackPlugin({
         template: "./src/upload.html",
