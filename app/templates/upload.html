@@ -11,25 +11,54 @@
 </form>
   </div>
   </div>
-  <div class="upload_history">
-  		<p class="upload_history_title">Upload History</p>
+<div class="container">
+<p class="upload_history_main_title">Upload history</p>
+<div class="upload_slider">
 		{% for upload in uploads %}
-		<div class="upload_history_record">
-  			<a href="{{upload.file.url}}"><div class="upload_history_record_titles">				
-  				<span class="upload_history_record_left_title">Your name</span>
-					<span class="upload_history_record_central_title">File name</span>
-					<span class="upload_history_record_right_title">Create date</span>
-				</div>
-				<div class="upload_history_record_info">
-					<span class="upload_history_record_info_left_title">{{upload.uploader}}</span>
-					<span class="upload_history_record_info_central_title">{{upload|filename}}</span>
-					<span class="upload_history_record_info_right_title">{{upload.upload_date}}</span>
-				</div>
-				<div class="upload_history_record_underlines">
-					<hr class="upload_history_record_underlines_left_line">
-				</div></a>
-  		</div>
-		{% endfor %}
+<div>
+<a href="{{upload.file.url}}">
+<div class="upload_history">
+  <div class="row">
+    <div class="col-md-5">
+      <span class="upload_history_title">Your name</span>
+    </div>
+    <div class="col-md-4">
+      <span class="upload_history_title">File name</span>
+    </div>
+    <div class="col-md-3">
+      <span class="upload_history_title">Create date</span>
+    </div>
   </div>
+  <div class="row">
+    <div class="col-md-5">
+      <span class="upload_history_info">{{upload.uploader}}</span>
+      <hr>
+    </div>
+    <div class="col-md-4">
+      <span class="upload_history_info">{{upload|filename|truncatechars:24}}</span>
+      <hr>
+    </div>
+    <div class="col-md-3">
+      <span class="upload_history_info">{{upload.upload_date|date:'Y.m.d'}}</span>
+      <hr>
+    </div>
+  </div>
+</div>
+</a>
+</div>
+{% empty %}
+<div class="is_empty upload_history_is_empty">
+	<p>Is Empty</p>
+</div>
+{% endfor %}
+</div>
+{% if uploads %}
+<div class="pager upload_pager">
+  <div class="prev"><i class="fas fa-angle-left"></i></div>
+  <div class="pagenum">1</div>
+  <div class="next"><i class="fas fa-angle-right"></i></div>
+</div>
+{% endif %}
+</div>
 </div>
 {% endblock %}

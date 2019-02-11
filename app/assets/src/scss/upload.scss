@@ -100,6 +100,8 @@ body {
 	margin-right: 90px;
 	word-wrap: break-word;
 	margin-bottom: 25px;
+	width: auto !important;
+	display: block !important;
 }
 .upload_history_is_empty {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
@@ -155,4 +157,13 @@ body {
 	margin-bottom: 17px;
 	margin-right: 5px;
 	border: 1px solid rgba(151, 151, 151, 0.1);
+}
+
+.upload_pager {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+	margin-bottom: 25px;
+	font-size: 18px;
+	color: #e0c1ff;
 }
