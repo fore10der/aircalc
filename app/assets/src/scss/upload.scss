@@ -6,8 +6,6 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
   font-weight: 400;
   src: url(../fonts/Futura.ttf);
 }
-
-
  
 .header {
   background-color: #ffffff;
@@ -32,7 +30,9 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
   text-decoration: none;
 }
 
-
+body {
+	background-color: #f1ebfb;
+}
 
 .upload{
 	padding-top: 65px;
@@ -48,7 +48,7 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 	border-radius: 16px;
 	background-color: #ffffff;
 }
-.form {
+.form{
 	width: 825px;
 	height: 310px;
   position: absolute;
@@ -80,17 +80,42 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 	font-weight: 500;
 	letter-spacing: -0.28px;
 }
-.upload_history{
-  width: 940px;
-	height: auto;
-	margin-top: 25px;
-  position: absolute;
-  background: #FFFFFF;
-  border-radius: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+.container {
+	border-radius: 16px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+	background-color: #ffffff;
+	margin-top: 35px;
+	padding-bottom: 1px;
 }
 
-.upload_history_title{
+.upload_history{
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+	margin-left: 90px;
+	margin-right: 90px;
+	word-wrap: break-word;
+	margin-bottom: 25px;
+}
+.upload_history_is_empty {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+	margin-left: 90px;
+	margin-right: 90px;
+	word-wrap: break-word;
+	margin-bottom: 25px;
+}
+.upload_history_is_empty p {
+	text-align: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	color: #565e77;
+	font-family: "Futura", sans-serif;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+
+.upload_history_main_title{
 	padding-left: 90px;
 	padding-top: 22px;
 	color: #565e77;
@@ -99,70 +124,30 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 	font-weight: 500;
 	letter-spacing: -0.28px;
 }
-.upload_history_record {
-	width: 760px;
-	height: 76px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-	border-radius: 8px;
-	background-color: #ffffff;
-	margin-left: 90px;
-	margin-right: 90px;
-	margin-bottom: 25px;
-}
-.upload_history_record a {
-	    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    text-decoration: none;
-    color: initial;
+
+.form-control {
+	border: 0;
 }
 
-.upload_history_record_titles {
-padding-top: 15px;
-}
-.upload_history_record_central_title {
-	padding-left: 333px;
-	padding-right: 148px;
-}
-.upload_history_record_left_title{
-	padding-left: 31px;
-}
-.upload_history_record_right_title{
-	padding-right: 60px;
-}
-.upload_history_record_titles span {
-	color: #4a90e2;
-	font-family: "Futura", sans-serif;
-	font-size: 10px;
+.upload_history_title {
+	padding-top: 15px;
 	font-weight: 500;
+	font-size: 10px;
+	color: #4a90e2;
 	color: rgba(44, 51, 86, 0.2);
+	padding-left: 20px;
 }
-.upload_history_record_info {
-padding-top: 6px;
-}
-
-.upload_history_record_info span {
+.upload_history_info {
 	color: #565c78;
-	font-family: "Futura", sans-serif;
 	font-size: 16px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
+	padding-left: 20px;
 }
-
-.upload_history_record_info_left_title{
-padding-left: 31px;
-}
-.upload_history_record_info_central_title {
-padding-left: 310px;
-padding-right: 117px;
-}
-
-.upload_history_record_underlines hr {
+.upload_history hr {
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 17px;
+	margin-right: 5px;
 	border: 1px solid rgba(151, 151, 151, 0.1);
-	height: 1px;
-}
-
-.upload_history_record_underlines_left_line{
-	margin-left: 32px;
-	margin-right: 6px;
 }
