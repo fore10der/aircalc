@@ -38,6 +38,7 @@
     "webpack-dev-server": "^3.1.10"
   },
   "dependencies": {
+    "bootstrap": "^4.2.1",
     "copy-webpack-plugin": "^4.6.0",
     "dropzone": "^5.5.1",
     "normalize.css": "^8.0.1"
