@@ -1,7 +1,6 @@
 from .base import *
 
-
-PAGE_CACHE_SECONDS = 1
+DEBUG = False
 
 DATABASES = {
     'default': {
