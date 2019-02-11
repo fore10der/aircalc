@@ -12,6 +12,9 @@ class UploadFileView(FormMixin,ListView):
     template_name = 'upload.html'
     context_object_name = 'uploads'
     form_class = TestFileForm
+
+    def get_success_url(self):
+        return reverse('loader')
     
     def post(self, form):
         file = self.request.FILES['file_input']
