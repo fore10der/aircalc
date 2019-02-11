@@ -14,7 +14,7 @@ from dateutil.relativedelta import relativedelta
 from xhtml2pdf import pisa
 from gss.settings.base import MEDIA_ROOT
 from .models import ReportedFile
-
+from django.core.files.base import ContentFile
 import os
 
 def fetch_resources(uri,rel):
@@ -103,25 +103,28 @@ def build_plots(unit_stats, dates):
 
 #Загружаем pdf
 def build_report(context,docinfo):
-    #Из html
+
     template_path = 'pdf_report.html'
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="{0}.pdf"'.format(docinfo["filename"])
-    # Находим и рендерим в переменную
     template = get_template(template_path)
+    result = io.BytesIO()
     html = template.render(context)
+
     # Создаем с последующей выдачей юзверю
     pisaStatus = pisa.CreatePDF(
-       html, dest=response, link_callback=fetch_resources)
-    # Проверяем ошибки
-    print(pisaStatus.err)
+       html, dest=result, link_callback=fetch_resources)
     if pisaStatus.err:
        return HttpResponse('We had some errors <pre>' + html + '</pre>')
-       # TODO Repair
-    # ReportedFile.objects.create(file=pisaStatus, \
-    #     reporter=docinfo["creator"], \
-    #     report_date_start=docinfo["report_date_start"], \
-    #     report_date_end=docinfo["report_date_end"])
+    response = HttpResponse(result.getvalue())
+    response['Content-Type'] = 'application/pdf'
+    response['Content-Disposition'] = 'attachment; filename="%s.pdf"'%(docinfo["filename"])
+
+    pdf_to_save = ContentFile(result.getvalue())
+    pdf_to_save.name = "%s.pdf"%(docinfo["filename"])
+    ReportedFile.objects.create(file=pdf_to_save, \
+        reporter=docinfo["creator"], \
+        report_date_start=docinfo["report_date_start"], \
+        report_date_end=docinfo["report_date_end"])
+
     return response
 
 #Функция для форматирования даты для отображения в pdf (см заголовок левой таблицы)
