@@ -1,14 +1,24 @@
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormMixin
+from django.views.generic import ListView
 from .forms import TestFileForm
-from .utils import preprocess_xlsx, store_to_db #draw_plot, build_bars, build_pdf,
-from django.http import HttpResponse
+from .models import UploadedFile
+from .utils import preprocess_xlsx, store_to_db
 from django.shortcuts import render
+from django.http import HttpRequest
+from django.urls import reverse
 
-class TestFileView(FormView):
+class UploadFileView(FormMixin,ListView):
+    queryset = UploadedFile.objects.order_by('-upload_date')
     template_name = 'upload.html'
+    context_object_name = 'uploads'
     form_class = TestFileForm
-    success_url = '/'
     
-    def form_valid(self, form):
-        data = preprocess_xlsx(self.request.FILES['file_input'])
+    def post(self, form):
+        file = self.request.FILES['file_input']
+        data = preprocess_xlsx(file)
         store_to_db(data)
+        UploadedFile.objects.create(file=file,uploader=self.request.user.username)
+        return self.form_valid(form)
+        
+    def form_valid(self, form):
+        return super().form_valid(form)

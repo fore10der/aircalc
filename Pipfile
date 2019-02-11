@@ -5,7 +5,6 @@ verify_ssl = true
 
 [packages]
 django = "*"
-django-webpack-loader = "*"
 openpyxl = "*"
 xhtml2pdf = "*"
 matplotlib = "*"

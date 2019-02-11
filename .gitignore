@@ -116,8 +116,10 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-static/*
+app/static/*
 media/*
+app/media/reports/*
+app/media/sources/*
 
 # vscode
 .vscode/

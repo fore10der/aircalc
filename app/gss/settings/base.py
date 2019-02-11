@@ -37,14 +37,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'webpack_loader',
     'gss',
     'api',
     'loader',
     'reporter',
     'units',
-    'aircarts',
-    'login_required'
+    'aircarts'
 ]
 
 REST_FRAMEWORK = {
@@ -137,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "assets"),
+    os.path.join(BASE_DIR, "assets","dist"),
 )
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
@@ -149,8 +147,3 @@ REPORT_PATH = 'reports/'
 SOURCE_PATH = 'sources/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# LOGIN_EXEMPT_URLS = [
-#         "/api/uploads/",
-#         "/api/reports/"
-# ]

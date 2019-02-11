@@ -36,7 +36,7 @@ body {
 
 .upload{
 	padding-top: 65px;
-  margin: auto;
+  	margin: auto;
 	width: 940px;
 	height: 400px;
 }
@@ -62,6 +62,11 @@ body {
   margin-top: 45px;
   margin-bottom: 45px;
 }
+
+.upload_form {
+	height: 100%;
+}
+
 
 .upload_form button {
 	padding-top: 116px;

@@ -7,12 +7,11 @@ class LoginRequiredMiddleware(object):
         self.get_response = get_response
 
     def __call__(self, request):
-        available_settings = dir(settings)
-        if 'LOGIN_URL' not in available_settings:
+        if not hasattr(settings,'LOGIN_URL'):
             raise Exception('LOGIN_URL must be defined at settings')
         login_url = settings.LOGIN_URL
 
-        if 'LOGIN_EXEMPT_URLS' not in available_settings:
+        if not hasattr(settings,'LOGIN_EXEMPT_URLS'):
             login_exempt_urls = []
         else:
             login_exempt_urls = settings.LOGIN_EXEMPT_URLS

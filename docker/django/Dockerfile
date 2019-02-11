@@ -19,6 +19,7 @@ RUN pip install --upgrade pip
 RUN pip install pipenv
 COPY ./Pipfile /usr/src/app/Pipfile
 COPY ./docker/django/entrypoint.sh /usr/src/app/entrypoint.sh
+RUN chmod +x entrypoint.sh
 RUN pipenv install --skip-lock --system --dev
 
 # copy project

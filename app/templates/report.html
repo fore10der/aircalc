@@ -1,96 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>Report</title>
-    <style>
-        @page {
-            size: A4 landscape;
-            margin: 0;
-            @frame header_frame {           /* Static frame */
-                right: 50pt; left: 50pt; top: 50pt; height: 70pt; width: 441pt;
-            }
-            @frame col1_frame {             /* Content frame 1 */
-                left: 50pt; width: 171pt; top: 170pt;
-            }
-            @frame col2_frame {             /* Content frame 2 */
-                left: 221pt; width: 661pt; top: 120pt;
-            }
-        }
-        @font-face {
-            font-family: Roboto;
-            src: url(src/fonts/Roboto-Regular.ttf);
-        }
-        body {
-            font-family: Roboto;
-        }
-        h1 {
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .title {
-            text-align: center;
-        }
-        td {
-            text-align: center;
-            width: 50%;
-            line-height: 0;
-        }
-        td.table-title {
-            width: 25%
-        }
-        .tfoot td {
-            background-color: #37a2f0;
-        }
-        .thead td {
-            background-color: #c4d9f5;
-        }
-        .tsubhead td {
-            background-color: #89BCFC;
-        }
-        .unit-headtd {
-            line-height: 3 !important;
-            background-color: #c4d9f5 !important;
-            border-bottom-width: 0;
-        }
-        .unit-value {
-            width: 100px;
-        }
-    </style> 
-</head>
-<body>
-{% comment %} {% with units_stats.0 as unit %} {% endcomment %}
-{% for unit in units_stats %}
-    <table id="header_content" border="1" cellpadding="2">
-        <tbody>
-            <tr><td class="unit-headtd">Supplier</td><td class="unit-value">{{unit.supplier}}</td><td rowspan="6" colspan="2">{{unit.number}}</td></tr>
-            <tr><td class="unit-headtd">Part number</td><td class="unit-value">{{unit.number}}</td></tr>
-            <tr><td class="unit-headtd">Component name</td><td class="unit-value"></td></tr>
-            <tr><td class="unit-headtd">Qty per aircraft</td><td class="unit-value"></td></tr>
-            <tr><td class="unit-headtd">MTBUR</td><td class="unit-value"></td></tr>
-            <tr><td class="unit-headtd">Relability</td><td class="unit-value"></td></tr>
-        {% comment %} <div class="title">
-            <h1>{{unit.title}}</h1>
-        </div> {% endcomment %}
-        </tbody>
-    </table>
-    <pdf:nextframe />
-    <table id="table" border="1" cellpadding="2">
-    <thead class="thead"><tr><td colspan="2" scope="colgroup"> {{report_bounds.interval}} months from {{report_bounds.start}} to {{report_bounds.end}} </td></tr></thead>
-    <tr class="tsubhead"><td>Customer</td><td>F/H</td></tr>
-    <tbody>         
-        {% for fh_stat in companies_stats.fh_stats %}
-            <tr><td class="table-title">{{ fh_stat.board_number }}</td><td id="trside">{{ fh_stat.value}}</td></tr>
-        {% endfor %}
-    </tbody>           
-    <tfoot class="tfoot">
-        <tr><td>Total</td><td>{{companies_stats.total_fh}}</td></tr>
-    </tfoot>
-    </table>
-    <pdf:nextframe />
-    <img id="plot" src="data:image/png;base64,{{unit.plot}}" />
-    <pdf:nextpage />
-{% endfor %}
-{% comment %} {% endwith %} {% endcomment %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% load filename %}
+{% block content %}
+	<form method="POST" class="report_form">
+	{% csrf_token %}
+		<div class="report_form_name">
+			<div class="report_form_name_title">
+				<span>Report name</span>
+			</div>
+			<div class="report_form_name_input">
+				{{form.report_name}}
+				<hr>
+			</div>
+		</div>
+		<div class="report_form_date">
+			<div class="report_form_date_title">
+				<span>Report date</span>
+			</div>
+			<div class="report_form_date_input">
+				{{form.report_date_start}}
+				<span>-</span>
+				{{form.report_date_end}}
+				<hr>
+			</div>
+		</div>
+		<button>Send report</button>
+	</form>
+<div class="report_history">
+    <div class="report_history_title">Report History</div>
+		{% for report in reports %}
+				  		<div class="report_history_record">
+  					<a href="#"><div class="report_history_record_titles">				
+  					<span class="report_history_record_left_title">Your name</span>
+						<span class="report_history_record_right_title">Report name</span>
+						</div>
+						<div class="report_history_record_info">
+						<span class="report_history_record_info_left_title">{{report.reporter}}</span>
+						<span class="report_history_record_info_right_title">{{report|filename}}</span>
+						</div>
+						<div class="report_history_record_underlines">
+						<hr class="report_history_record_underlines_left_line">
+						</div>
+  					<div class="report_history_record_date_titles">				
+  					<span class="report_history_record_date_left_title">Report date</span>
+						<span class="report_history_record_date_right_title">Create date</span>
+						</div>
+						<div class="report_history_record_date_info">
+						<span class="report_history_record_info_date_left_title">{{report.report_date_start}} - {{report.report_date_end}}</span>
+						<span class="report_history_record_info_date_right_title">{{report.generate_date}}</span>
+						</div>
+						<div class="report_history_record_underlines">
+						<hr class="report_history_record_underlines_left_line">
+						</div>
+					</a>						
+  				</div>
+		{% endfor %}
+  </div>
+</form>
+{% endblock %}
