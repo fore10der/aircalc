@@ -16,7 +16,7 @@ module.exports = {
     module: {
         rules: [
         {
-            test: /\.(png|jpg)$/,
+            test: /\.(png|jpg)$/, //stoppoint
             loader: 'file-loader'
         },
         {
