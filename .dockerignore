@@ -121,8 +121,14 @@ dmypy.json
 #Pipfie
 *.lock
 
+app/static
 app/static/*
+app/static/**/*
+app/assets/dist/**/*
+app/assets/dist/*
+app/assets/dist
 app/reports/*
 app/sources/*
-app/assets/dist
+app/assets/node_modules/**/*
+app/assets/node_modules/*
 app/assets/node_modules

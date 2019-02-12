@@ -1,7 +1,12 @@
 FROM node:carbon-jessie
 
-COPY ./app/assets/ /usr/src/app/assets
 WORKDIR /usr/src/app/assets
 
-RUN ["npm", "install"]
-RUN ["npm", "run", "build"]
+COPY ./app/assets/package.json ./
+COPY ./app/assets/.babelrc ./
+COPY ./app/assets/postcss.config.js ./
+COPY ./app/assets/webpack.config.js ./
+COPY ./app/assets/src ./src
+
+RUN npm install
+RUN npm run build
