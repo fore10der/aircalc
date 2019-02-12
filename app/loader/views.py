@@ -14,10 +14,10 @@ class UploadFileView(FormMixin,ListView):
     form_class = TestFileForm
 
     def get_success_url(self):
-        return reverse('loader')
+        return reverse('loader', kwargs={'success':true})
     
     def post(self, form):
-        file = self.request.FILES['file_input']
+        file = self.request.FILES["file_input"]
         data = preprocess_xlsx(file)
         store_to_db(data)
         UploadedFile.objects.create(file=file,uploader=self.request.user.username)

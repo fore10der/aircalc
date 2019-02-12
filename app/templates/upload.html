@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 {% load filename %}
 {% block content %}
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Файл был загружен успешно
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 	<div class="upload">
-	<div class="form_around">
-  <div class="form">
+    <div class="upload_container">
+      <div class="container">
+        <div class="upload_place_container">
 	<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     {{ form }}
@@ -11,6 +20,9 @@
 </form>
   </div>
   </div>
+          </div>
+      </div>
+<div class="upload_history_container">
 <div class="container">
 <p class="upload_history_main_title">Upload history</p>
 <div class="upload_slider">

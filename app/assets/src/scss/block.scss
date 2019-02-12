@@ -1,0 +1,43 @@
+
+.header {
+  background-color: #ffffff;
+  padding: 28px 22px;
+  text-align: center;
+}
+
+.header .central_link {
+  margin-right: 200px;
+  margin-left: 200px;
+}
+
+.header a {
+  color: rgba(142, 142, 245, 0.4);
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 14px;
+  text-decoration: none;
+}
+.block_container .container {
+	width: 940px;
+	height: 180px;
+	border-radius: 8px;
+	background-color: #ffffff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	margin-top: 200px;
+}
+
+.block_container img {
+	  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 28px;
+}
+
+.block_container p {
+	margin-top: 20px;
+	font-weight: 500;
+	font-size: 20px;
+	color: #e9d6ff;
+	color: #565e77;
+}
+

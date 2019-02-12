@@ -2,118 +2,136 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 	<title>GSS-report</title>
 	<link rel="stylesheet" href="styles.bundle.css" />
 </head>
 <header>
  <div class="header">
-    <a href="upload.html">Upload</a>
+    <a href="report.html">Upload</a>
     <a class="central_link" href="report.html">Report</a>
     <a href="#">Logout</a>
 </div> 
 </header>
 <body>
-	<div class="report_form">
-		<form class="report_form_name">
-			<div class="report_form_name_title">
-				<span>Report name</span>
-			</div>
-			<div class="report_form_name_input">
-				<input type="text" placeholder="Report name">
-				<hr>
-			</div>
-		</form>
-		<form class="report_form_date">
-			<div class="report_form_date_title">
-				<span>Report date</span>
-			</div>
-			<div class="report_form_date_input">
-				<input type="text" placeholder="dd.mm.aaaa">
-				<span>-</span>
-				<input type="text" placeholder="dd.mm.aaaa">
-				<hr>
-			</div>
+	<div class="report">
+	<div class="report_form_container">
+		<div class="container">
+		<form>   
+			<div class="form-row justify-content-center align-items-center">
+    <div class="form-group col-md-6">
+    	<div class="report_form_name">
+      <label for="report_form_name_title">Report name</label><br>
+      <input type="email" class="" id="report_form_name_title" placeholder="Report name">
+      <hr>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+    	<div class="report_form_date">
+      <label for="report_form_date_title">Create date</label><br>
+      <input type="password" class="" id="report_form_date_title" placeholder="dd.mm.aaaa">
+      <span>-</span>
+      <input type="password" class="" id="report_form_date_title" placeholder="dd.mm.aaaa">
+      <hr>
+    </div>
+    </div>
+  </div>
 		</form>
 		<button>Send report</button>
-	</div>
-	<div class="report_history">
-		<div class="report_history_title">Report History</div>
-		  		<div class="report_history_record">
-  					<a href="#"><div class="report_history_record_titles">				
-  					<span class="report_history_record_left_title">Your name</span>
-						<span class="report_history_record_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_info">
-						<span class="report_history_record_info_left_title">Full name</span>
-						<span class="report_history_record_info_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>
-  					<div class="report_history_record_date_titles">				
-  					<span class="report_history_record_date_left_title">Report date</span>
-						<span class="report_history_record_date_right_title">Create date</span>
-						</div>
-						<div class="report_history_record_date_info">
-						<span class="report_history_record_info_date_left_title">dd.mm.aaaa - dd.mm.aaaa</span>
-						<span class="report_history_record_info_date_right_title">dd.mm.aaaa</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>
-					</a>						
-  				</div>
-		  		<form class="report_history_record">
-  					<a href="#"><div class="report_history_record_titles">				
-  					<span class="report_history_record_left_title">Your name</span>
-						<span class="report_history_record_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_info">
-						<span class="report_history_record_info_left_title">Full name</span>
-						<span class="report_history_record_info_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>
-  					<div class="report_history_record_date_titles">				
-  					<span class="report_history_record_date_left_title">Report date</span>
-						<span class="report_history_record_date_right_title">Create date</span>
-						</div>
-						<div class="report_history_record_date_info">
-						<span class="report_history_record_info_date_left_title">dd.mm.aaaa - dd.mm.aaaa</span>
-						<span class="report_history_record_info_date_right_title">dd.mm.aaaa</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>						
-  				</form>
-  			</a>
-		  		<form class="report_history_record">
-  					<a href="#"><div class="report_history_record_titles">				
-  					<span class="report_history_record_left_title">Your name</span>
-						<span class="report_history_record_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_info">
-						<span class="report_history_record_info_left_title">Full name</span>
-						<span class="report_history_record_info_right_title">Report name</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>
-  					<div class="report_history_record_date_titles">				
-  					<span class="report_history_record_date_left_title">Report date</span>
-						<span class="report_history_record_date_right_title">Create date</span>
-						</div>
-						<div class="report_history_record_date_info">
-						<span class="report_history_record_info_date_left_title">dd.mm.aaaa - dd.mm.aaaa</span>
-						<span class="report_history_record_info_date_right_title">dd.mm.aaaa</span>
-						</div>
-						<div class="report_history_record_underlines">
-						<hr class="report_history_record_underlines_left_line">
-						</div>						
-  				</form>
-  			</a>				  				
 		</div>
+	</div>
+
+    <div class="report_history_container">    
+      <div class="container">
+  	   <p class="report_history_main_title">Report history</p>
+        <a href="#"><div class="report_history">
+          <div class="row">
+            <div class="col-md-8">
+            <span class="report_history_title">Your name</span>
+          </div>
+          <div class="col-md-4">
+            <span class="report_history_title">Report name</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <span class="report_history_info">Full name</span>
+            <hr>
+          </div>
+        <div class="col-md-4">
+          <span class="report_history_info">Report name</span>
+        <hr>
+        </div>
+    </div>
+          <div class="row">
+            <div class="col-md-8">
+            <span class="report_history_title">Report date</span>
+          </div>
+          <div class="col-md-4">
+            <span class="report_history_title">Create date</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <span class="report_history_info">dd.mm.aaaa</span><span class="report_history_info">-</span><span class="report_history_info">dd.mm.aaaa</span>
+            <hr>
+          </div>
+        <div class="col-md-4">
+          <span class="report_history_info">dd.mm.aaaa</span>
+        <hr>
+        </div>
+    </div>    
+  </div>
+</a>
+        <a href="#"><div class="report_history">
+          <div class="row">
+            <div class="col-md-8">
+            <span class="report_history_title">Your name</span>
+          </div>
+          <div class="col-md-4">
+            <span class="report_history_title">Report name</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <span class="report_history_info">Full name</span>
+            <hr>
+          </div>
+        <div class="col-md-4">
+          <span class="report_history_info">Report name</span>
+        <hr>
+        </div>
+    </div>
+          <div class="row">
+            <div class="col-md-8">
+            <span class="report_history_title">Report date</span>
+          </div>
+          <div class="col-md-4">
+            <span class="report_history_title">Create date</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <span class="report_history_info">dd.mm.aaaa</span><span class="report_history_info">-</span><span class="report_history_info">dd.mm.aaaa</span>
+            <hr>
+          </div>
+        <div class="col-md-4">
+          <span class="report_history_info">dd.mm.aaaa</span>
+        <hr>
+        </div>
+    </div>    
+  </div>
+</a>
+<div class="report_history_is_empty">
+	<p>Is Empty</p>
+</div>
+</div>
+</div>
+
+
+</div>		
+	</div>
 </body>
 </html>
 
