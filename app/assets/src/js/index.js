@@ -2,7 +2,6 @@ import $ from "jquery";
 import "bootstrap"
 window.$ = $;
 import 'slick-carousel';
-// import './dropzoneloader.js'
 
 let $status = $('.pager .pagenum')
 let $uploadSlider = $('.upload_slider')

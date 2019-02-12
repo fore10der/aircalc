@@ -16,7 +16,7 @@ module.exports = {
     module: {
         rules: [
         {
-            test: /\.(png|jpg)$/, //stoppoint
+            test: /\.(png|jpg)$/,
             loader: 'file-loader'
         },
         {
@@ -104,6 +104,12 @@ module.exports = {
       {
         from: "./src/fonts",
         to: "./fonts"
+      },
+    ]),
+    new CopyWebpackPlugin([
+      {
+        from: "./src/img",
+        to: "./"
       },
     ]),
         new HtmlWebPackPlugin({
