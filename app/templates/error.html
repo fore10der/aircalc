@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Error
+{% endblock %}
 
 {% block content %}
-ошибка 503 доступ запрещен
+	<div class="block">
+		<div class="block_container">
+			<div class="container">
+				<img class=""src="{% static "img/6-layers.png" %}" alt="">
+				<p class="text-center">Sorry, you are no access to view this page</p>
+			</div>
+		</div>
+	</div>
 {% endblock %}

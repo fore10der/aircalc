@@ -1,12 +1,4 @@
-$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", Futura,sans-serif;
 
-@font-face { 
-  font-family: "Futura";
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/Futura.ttf);
-}
- 
 .header {
   background-color: #ffffff;
   padding: 28px 22px;
@@ -19,122 +11,104 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 }
 
 .header a {
-  font-family: "Futura", sans-serif;
   color: rgba(142, 142, 245, 0.4);
-  width: 84px;
-  height: 21px;
   font-size: 19px;
   font-weight: 500;
   line-height: 14px;
-  text-align: center;
   text-decoration: none;
 }
 
-
-.report_form {
-  margin-left: auto;
-  margin-right: auto;
+.report_form_container .container{
   margin-top: 65px;
-  margin-bottom: auto;
+  position: relative;
 	width: 940px;
-	height: 200px;
+	height: 220px;
 	background-color: #ffffff;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
 	border-radius: 8px;
 }
-
-.report_form_name {
-	width: 248px;
-	margin-left: 190px;
-	position: absolute;
-	margin-top: 38px;
-	border-radius: 8px;
-	padding-left: 20px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+.container .form_row {
+	padding-left: 30px;
 }
 
-.report_form_name_title {
-	height: 14px;
-	color: #4a90e2;
+.report_form_name  {
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	margin-top: 30px;
+	margin-left: 157px;
+	height: 80px;
+	
+}
+
+.reoprt_form_name hr {
+	border: 1px solid rgba(151, 151, 151, 0.1);
+	padding-bottom: 20px;
+}
+
+.report_form_name label{
+	margin-left: 20px;
 	color: rgba(44, 51, 86, 0.2);
-	font-family: "Futura", sans-serif;
 	font-size: 10px;
 	font-weight: 500;
-	padding-bottom: 3px;
 }
-
-.report_form_name_input input{
-	color: #d5d6dd;
-	font-family: "Futura", sans-serif;
+.report_form_name input{
+	margin-left: 19px;
 	font-size: 16px;
-	font-weight: 500;
 	letter-spacing: -0.28px;
-	background-color: #ffffff;
-	border: 0;	
-  box-sizing: border-box;
-  padding-right: 138px;
-  padding-bottom: 4px;
-  width: 240px;
+	font-weight: 500;
+	border: 0;
+	width: 140px;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
 }
-
 .report_form_date {
-	width: 248px;
-	margin-left: 480px;
-	position: absolute;
-	margin-top: 38px;
 	border-radius: 8px;
-	padding-left: 20px;
-	margin-right: 211px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);	
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	margin-top: 30px;
+	margin-left: 22px;
+	padding-bottom: 15px;
+	margin-right: 140px;
+	height: 80px;
+}
+.report_form_name hr {
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-right: 10px;
+	border: 1px solid rgba(151, 151, 151, 0.1);
+}
+.report_form_date hr {
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-right: 10px;
+	border: 1px solid rgba(151, 151, 151, 0.1);
 }
 
-.report_form_date_title {
-	height: 14px;
-	color: #4a90e2;
+.report_form_date label{
+	margin-left: 20px;
 	color: rgba(44, 51, 86, 0.2);
-	font-family: "Futura", sans-serif;
 	font-size: 10px;
 	font-weight: 500;
-	padding-bottom: 3px;
+
+}
+.container .form-row {
+	height: 0px;
 }
 
-.report_form_date_input input{
-	color: #d5d6dd;
-	font-family: "Futura", sans-serif;
+.report_form_date input{
+	margin-left: 19px;
+	width: 90px;
 	font-size: 16px;
-	font-weight: 500;
-	width: 100px;
 	letter-spacing: -0.28px;
-	background-color: #ffffff;
-	border: 0;	
- 	box-sizing: border-box;
-  padding-bottom: 4px;
-}
-.report_form_date_input span {
-	color: #d5d6dd;
-	font-family: "Futura", sans-serif;
-	font-size: 16px;
 	font-weight: 500;
-	letter-spacing: -0.28px;
+	border: 0;
+	webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important;
+  margin-right: 20px;
 }
 
-.report_form_date_input hr {
-	width: 213px;
-	height: 0;
-	border: 1px solid rgba(151, 151, 151, 0.1);
-	margin-left: 0px;
-	margin-bottom: 13px;
-}
-
-.report_form_name_input hr {
-	width: 230px;
-	height: 0;
-	border: 1px solid rgba(151, 151, 151, 0.1);
-	margin-left: 0px;
-	margin-bottom: 13px;
-}
-
-.report_form button {
+.report_form_container button {
 	width: 300px;
 	height: 31px;
 	background-color: #d2a6ff;
@@ -144,19 +118,24 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 	margin-top: 142px;
 	color: #ffffff;
 	font-size: 16px;
-	font-weight: 500;
-	font-family: "Futura",sans-serif;
+	font-weight: 700;
 }
 
-.report_history{
-	margin-left: 170px;
+.report_history_container .container{
   width: 940px;
 	height: auto;
 	margin-top: 45px;
-  position: absolute;
   background: #FFFFFF;
   border-radius: 16px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.report_history{
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+	margin-left: 90px;
+	margin-right: 90px;
+	word-wrap: break-word;
+	margin-bottom: 25px;
 }
 
 .report_history_title{
@@ -164,107 +143,82 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 	padding-top: 22px;
 	padding-bottom: 24px;
 	color: #565e77;
-	font-family: "Futura", sans-serif;
 	font-size: 28px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
 }
-.report_history_record {
-	width: 760px;
-	height: 155px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-	border-radius: 8px;
+
+.report_history_container .container {
+	border-radius: 16px;
+	width: 940px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 	background-color: #ffffff;
+	margin-top: 35px;
+	padding-bottom: 1px;
+}
+
+.report_history{
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
 	margin-left: 90px;
 	margin-right: 90px;
+	word-wrap: break-word;
 	margin-bottom: 25px;
 }
-
-.report_history_record a {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+.report_history a:hover, a:visited, a:link, a:active
+{
     text-decoration: none;
-    color: initial;
+}
+.report_history_is_empty {
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
+	border-radius: 8px;
+	margin-left: 90px;
+	margin-right: 90px;
+	word-wrap: break-word;
+	margin-bottom: 25px;
+}
+.report_history_is_empty p {
+	text-align: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	color: #565e77;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
 }
 
-.report_history_record_titles {
+.report_history_main_title{
+	padding-left: 90px;
+	padding-top: 22px;
+	color: #565e77;
+	font-size: 28px;
+	font-weight: 500;
+	letter-spacing: -0.28px;
+}
+
+.form-control {
+	border: 0;
+}
+
+.report_history_title {
 	padding-top: 15px;
-}
-.report_history_record_right_title {
-	padding-left: 333px;
-	padding-right: 60px;
-}
-.report_history_record_left_title{
-	padding-left: 31px;
-}
-.report_history_record_date_right_title {
-	padding-left: 325px;
-}
-.report_history_record_date_left_title{
-	padding-left: 31px;
-}
-.report_history_record_right_title{
-	padding-right: 60px;
-}
-.report_history_record_titles span {
-	color: #4a90e2;
-	font-family: "Futura", sans-serif;
-	font-size: 10px;
 	font-weight: 500;
-	color: rgba(44, 51, 86, 0.2);
-}
-.report_history_record_date_titles span {
-	color: #4a90e2;
-	font-family: "Futura", sans-serif;
 	font-size: 10px;
-	font-weight: 500;
+	color: #4a90e2;
 	color: rgba(44, 51, 86, 0.2);
+	padding-left: 20px;
 }
-.report_history_record_info {
-padding-top: 6px;
-}
-.report_history_record_info {
-padding-top: 6px;
-}
-
-.report_history_record_info span {
+.report_history_info {
 	color: #565c78;
-	font-family: "Futura", sans-serif;
 	font-size: 16px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
+	padding-left: 20px;
 }
-.report_history_record_date_info span {
-	color: #565c78;
-	font-family: "Futura", sans-serif;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing: -0.28px;
-}
-
-.report_history_record_info_left_title{
-padding-left: 31px;
-}
-.report_history_record_info_right_title {
-padding-left: 310px;
-padding-right: 117px;
-}
-
-.report_history_record_info_date_left_title{
-padding-left: 31px;
-}
-.report_history_record_info_date_right_title {
-padding-left: 170px;
-padding-right: 50px;
-}
-
-.report_history_record_underlines hr {
+.report_history hr {
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 17px;
+	margin-right: 5px;
 	border: 1px solid rgba(151, 151, 151, 0.1);
-	height: 1px;
-}
-
-.report_history_record_underlines_left_line{
-	margin-left: 32px;
-	margin-right: 6px;
 }

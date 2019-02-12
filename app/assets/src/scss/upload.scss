@@ -1,12 +1,4 @@
-$font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica Neue", Futura,sans-serif;
 
-@font-face { 
-  font-family: "Futura";
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/Futura.ttf);
-}
- 
 .header {
   background-color: #ffffff;
   padding: 28px 22px;
@@ -19,74 +11,37 @@ $font-stack: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans", "Helvetica 
 }
 
 .header a {
-  font-family: "Futura", sans-serif;
   color: rgba(142, 142, 245, 0.4);
-  width: 84px;
-  height: 21px;
   font-size: 19px;
   font-weight: 500;
   line-height: 14px;
-  text-align: center;
   text-decoration: none;
 }
 
-body {
-	background-color: #f1ebfb;
-}
 
-.upload{
-	padding-top: 65px;
-  	margin: auto;
+.upload_container .container {
+	position: relative;
 	width: 940px;
+	margin-top: 65px;
 	height: 400px;
-}
-
-.form_around {
-	width: 940px;
-	height: 400px;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-	border-radius: 16px;
 	background-color: #ffffff;
+	border-radius: 16px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-.form{
+
+.upload_place_container{
+	position: absolute;
 	width: 825px;
 	height: 310px;
-  position: absolute;
-  background: #FFFFFF;
-  text-align: center;
-  border: 2px solid #a4cffc;
-  border-radius: 16px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  margin-left: 58px;
-  margin-right: 57px;
-  margin-top: 45px;
-  margin-bottom: 45px;
-}
-
-.upload_form {
-	height: 100%;
-}
-
-
-.upload_form button {
-	padding-top: 116px;
-	padding-bottom: 45px;
-	box-shadow: none;
-	border: 0;
-	background-color: #FFFFFF;
-	cursor:pointer;
-}
-
-.upload_form p{
-	font-family: "Futura", sans-serif;
-	padding-bottom: 48px;
-	color: #cdcdcd;
-	font-size: 16px;
-	font-weight: 500;
-	letter-spacing: -0.28px;
-}
-.container {
+	border: 2px solid #a4cffc;
 	border-radius: 16px;
+	top: 45px;
+	left: 57px;
+}
+
+.upload_history_container .container {
+	border-radius: 16px;
+	width: 940px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 	background-color: #ffffff;
 	margin-top: 35px;
@@ -101,6 +56,10 @@ body {
 	word-wrap: break-word;
 	margin-bottom: 25px;
 }
+.upload_history a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
 .upload_history_is_empty {
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.07);
 	border-radius: 8px;
@@ -114,7 +73,6 @@ body {
 	padding-top: 40px;
 	padding-bottom: 40px;
 	color: #565e77;
-	font-family: "Futura", sans-serif;
 	font-size: 28px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
@@ -124,7 +82,6 @@ body {
 	padding-left: 90px;
 	padding-top: 22px;
 	color: #565e77;
-	font-family: "Futura", sans-serif;
 	font-size: 28px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
@@ -155,4 +112,13 @@ body {
 	margin-bottom: 17px;
 	margin-right: 5px;
 	border: 1px solid rgba(151, 151, 151, 0.1);
+}
+
+.upload_pager {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+	margin-bottom: 25px;
+	font-size: 18px;
+	color: #e0c1ff;
 }

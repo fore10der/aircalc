@@ -106,8 +106,14 @@ module.exports = {
         to: "./fonts"
       },
     ]),
+    new CopyWebpackPlugin([
+      {
+        from: "./src/img",
+        to: "./img"
+      },
+    ]),
         new HtmlWebPackPlugin({
-        template: "./src/upload.html",
+        template: "./src/report.html",
         filename: "./index.html"
         })
     ]
