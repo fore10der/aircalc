@@ -3,8 +3,6 @@ import "bootstrap"
 window.$ = $;
 import 'slick-carousel';
 
-console.log("foo")
-
 let $status = $('.pager .pagenum')
 let $uploadSlider = $('.upload_slider')
 let $reportSlider = $('.report_slider')
