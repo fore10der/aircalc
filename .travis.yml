@@ -1,24 +1,19 @@
-matrix:
-  include:
-   - language: node_js
-     node_js:
-      - "node"
-     install:
-      - cd app/assets && npm install
-     script:
-      - npm run build
-   - language: python
-     python:
-       - 3.7-dev
-     services:
-       - postgresql
-     install:
-       - pip install pipenv
-       - pipenv install --skip-lock --system --dev
-     before_script:
-       - psql -c 'create database travisci;' -U postgres
-       - rm -rf $(find . -name migrations)
-       - python app/manage.py makemigrations --settings=gss.settings.ci
-       - python app/manage.py migrate --settings=gss.settings.ci
-     script:
-       - pytest -c pytest-ci.ini
+language: python
+python:
+  - 3.7-dev
+node_js: '11.2.0'
+services:
+  - postgresql
+install:
+  - pip install pipenv
+  - pipenv install --skip-lock --system --dev
+  - cd app/assets && npm install
+  - npm run build
+before_script:
+  - psql -c 'create database travisci;' -U postgres
+  - rm -rf $(find . -name migrations)
+  - python app/manage.py makemigrations --settings=gss.settings.ci
+  - python app/manage.py migrate --settings=gss.settings.ci
+  - python app/manage.py collectstatic --settings=gss.settings.ci
+script:
+  - pytest -c pytest-ci.ini
