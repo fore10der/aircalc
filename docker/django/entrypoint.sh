@@ -12,8 +12,8 @@ echo "INIT GROUPS"
 python manage.py initgroups --settings=gss.settings.docker
 
 echo "COLLECT STATIC"
+rm -r -f static
 python manage.py collectstatic --no-input --settings=gss.settings.docker
-
 
 
 exec "$@"

@@ -116,7 +116,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/static
 media/*
 app/media/reports/*
 app/media/sources/*
@@ -132,3 +131,6 @@ app/media/sources/*
 
 #Pipfie
 *.lock
+
+webpack-stats.json
+/static

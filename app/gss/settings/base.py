@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'webpack_loader',
     'gss',
     'api',
     'loader',
@@ -134,11 +135,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "assets","dist"),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static') 
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': '/', # must end with slash
+        'STATS_FILE': os.path.join(STATICFILES_DIRS[0], 'webpack-stats.json')
+    }
+}
 
 MEDIA_URL = '/media/'
 

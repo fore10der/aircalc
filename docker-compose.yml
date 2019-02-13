@@ -5,6 +5,7 @@ services:
     build: 
       context: ./
       dockerfile: ./docker/webpack/Dockerfile
+    command: npm run build
     volumes:
       - assets_volume:/usr/src/app/assets/dist
   web:
@@ -12,9 +13,9 @@ services:
       context: ./
       dockerfile: ./docker/django/Dockerfile
     volumes:
+      - assets_volume:/usr/src/app/assets/dist
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
-      - assets_volume:/usr/src/app/assets/dist
     command: gunicorn gss.wsgi:application --bind 0.0.0.0:8000 -t 9000
     expose: 
       - 8000
@@ -35,7 +36,7 @@ services:
       - 8000:80
     depends_on:
       - web
-volumes: 
+volumes:
   assets_volume:
   static_volume:
   media_volume:

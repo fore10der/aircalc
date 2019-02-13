@@ -13,6 +13,7 @@ python-dateutil = "*"
 djangorestframework = "*"
 psycopg2-binary = "*"
 gunicorn = "==19.9.0"
+django-webpack-loader = "*"
 
 [requires]
 python_version = "3.7"

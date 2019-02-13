@@ -1,23 +1,28 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleTracker = require('webpack-bundle-tracker');
 const fs = require("fs");
-const path = require('path')
+const path = require('path');
+
 
 module.exports = {
     entry: [
         "./src/js/index.js", "./src/scss/styles.scss" 
     ],
     output : {
-        filename : 'bundle.js',
+        filename : '[name].[hash].js',
         path : path.resolve(__dirname, 'dist')
     },
     module: {
         rules: [
         {
             test: /\.(png|jpg)$/,
-            loader: 'file-loader'
+            loader: 'file-loader',
+            options: {
+              outputPath: '/'
+          }
         },
         {
             test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -97,9 +102,11 @@ module.exports = {
         extensions: ['.js', '.jsx'],
     },
     plugins: [
+      new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin({
-      filename: "./styles.bundle.css"
+      filename: "./[name].[hash].css"
     }),
+    new BundleTracker({filename: './dist/webpack-stats.json'}),
     new CopyWebpackPlugin([
       {
         from: "./src/fonts",

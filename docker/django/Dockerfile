@@ -17,12 +17,12 @@ WORKDIR /usr/src/app
 # install dependencies
 RUN pip install --upgrade pip
 RUN pip install pipenv
-COPY ./Pipfile /usr/src/app/Pipfile
-COPY ./docker/django/entrypoint.sh /usr/src/app/entrypoint.sh
+COPY ./Pipfile ./
+COPY ./docker/django/entrypoint.sh ./
 RUN chmod +x entrypoint.sh
 RUN pipenv install --skip-lock --system --dev
 
 # copy project
-COPY ./app /usr/src/app/
+COPY ./app ./
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
