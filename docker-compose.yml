@@ -5,7 +5,7 @@ services:
     build: 
       context: ./
       dockerfile: ./docker/webpack/Dockerfile
-    command: npm run build
+    command: npm run prod
     volumes:
       - assets_volume:/usr/src/app/assets/dist
   web:
