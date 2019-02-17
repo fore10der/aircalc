@@ -51,7 +51,13 @@
       <hr>
     </div>
     <div class="col-md-3">
-      <span class="upload_history_info">{{upload.upload_date|date:'Y.m.d'}}</span>
+      <span class="upload_history_info">
+      {% if upload.upload_date %}
+        {{upload.upload_date|date:'Y.m.d'}}
+      {% else %}
+        File uploads...
+      {% endif %}
+      </span>
       <hr>
     </div>
   </div>
