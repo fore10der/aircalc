@@ -120,7 +120,7 @@ module.exports = {
       },
     ]),
         new HtmlWebPackPlugin({
-        template: "./src/report.html",
+        template: "./src/upload.html",
         filename: "./index.html"
         })
     ]

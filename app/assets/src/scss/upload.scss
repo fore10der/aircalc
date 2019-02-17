@@ -5,9 +5,23 @@
   text-align: center;
 }
 
-.header .central_link {
+.header .header_report_title {
   margin-right: 200px;
   margin-left: 200px;
+}
+
+.header .header_upload_title {
+	border-bottom: 2px solid #d2d2fb;
+	padding-bottom: 27px;
+	border-radius: 1px;
+}
+
+
+.header .header_logout_title {
+	border-bottom: 2px solid #d2d2fb hidden;
+	// border-bottom: 2px solid #d2d2fb hidden;
+	padding-bottom: 26px;
+	border-radius: 1px;
 }
 
 .header a {
@@ -28,8 +42,10 @@
 	border-radius: 16px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
-
-.upload_place_container{
+.upload_place_container_stage_1{
+	background-image: url(Clip_2.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 	position: absolute;
 	width: 825px;
 	height: 310px;
@@ -37,6 +53,65 @@
 	border-radius: 16px;
 	top: 45px;
 	left: 57px;
+}
+
+.upload_place_container_stage_1 button {
+	visibility: hidden;
+}
+
+.upload_place_container_stage_1 .upload_place_container_message_1 p {
+	text-align: center;
+	color: #cdcdcd;
+	letter-spacing: -0.28px;
+	font-size: 16px;
+	font-weight: 500;
+	margin-top: 180px;
+}
+
+.upload_place_container_stage_1 .upload_place_container_message_2 p{
+	visibility: hidden;
+}
+
+
+.upload_place_container_stage_2{
+	background-image: url(Fill_1.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	position: absolute;
+	width: 825px;
+	height: 310px;
+	border: 2px solid #a4cffc;
+	border-radius: 16px;
+	top: 45px;
+	left: 57px;
+}
+
+.upload_place_container_stage_2 button{
+	border-radius: 10px;
+	background-color: #d2a6ff;
+	opacity: 0.7;
+	width: 300px;
+	height: 31px;
+	color: #ffffff; 
+	font-size: 16px;
+	font-weight: 700;
+	border: 0;
+	position: relative;
+	margin-top: 235px;
+	margin-left: 262px;
+	margin-bottom: 10px;
+}
+
+.upload_place_container_stage_2 .upload_place_container_message_1 {
+	visibility: hidden;
+	margin-top: -40px;
+}
+
+.upload_place_container_stage_2 .upload_place_container_message_2 p {
+	text-align: center;
+	color: #cbcbcb;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 .upload_history_container .container {
@@ -85,6 +160,7 @@
 	font-size: 28px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
+	padding-bottom: 24px;
 }
 
 .form-control {
