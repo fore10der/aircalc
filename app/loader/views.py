@@ -2,7 +2,6 @@ from django.views.generic.edit import FormMixin
 from django.views.generic import ListView
 from .forms import TestFileForm
 from .models import UploadedFile
-from .utils import preprocess_xlsx, store_to_db
 from django.shortcuts import render
 from django.http import HttpRequest
 from django.urls import reverse
@@ -17,9 +16,7 @@ class UploadFileView(FormMixin,ListView):
         return reverse('loader')
     
     def post(self, form):
-        file = self.request.FILES["file_input"]
-        data = preprocess_xlsx(file)
-        store_to_db(data)
+        file = self.request.FILES["file"]
         UploadedFile.objects.create(file=file,uploader=self.request.user.username)
         return self.form_valid(form)
         
