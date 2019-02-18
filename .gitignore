@@ -133,4 +133,5 @@ app/media/sources/*
 *.lock
 
 webpack-stats.json
-/static
+app/static/*
+app/static/
