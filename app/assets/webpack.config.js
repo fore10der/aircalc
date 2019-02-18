@@ -5,6 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleTracker = require('webpack-bundle-tracker');
 const fs = require("fs");
 const path = require('path');
+const webpack = require('webpack');
 
 
 module.exports = {
@@ -102,6 +103,11 @@ module.exports = {
         extensions: ['.js', '.jsx'],
     },
     plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery/dist/jquery.min.js",
+        jQuery: "jquery/dist/jquery.min.js",
+        "window.jQuery": "jquery/dist/jquery.min.js"
+      }),
       new CleanWebpackPlugin(['dist']),
         new MiniCssExtractPlugin({
       filename: "./[name].[hash].css"

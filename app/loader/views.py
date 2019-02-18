@@ -1,27 +1,26 @@
 from django.views.generic.edit import FormMixin
 from django.views.generic import ListView
-from .forms import TestFileForm
 from .models import UploadedFile
-from .utils import preprocess_xlsx, store_to_db
-from django.shortcuts import render
-from django.http import HttpRequest
+from .forms import UploadForm
+from .utils import xlsx_parse
+from django.http import JsonResponse
 from django.urls import reverse
+from django.db.transaction import on_commit
 
-class UploadFileView(FormMixin,ListView):
+class UploadFileView(ListView):
     queryset = UploadedFile.objects.order_by('-upload_date')
     template_name = 'upload.html'
     context_object_name = 'uploads'
-    form_class = TestFileForm
-
-    def get_success_url(self):
-        return reverse('loader')
     
     def post(self, form):
-        file = self.request.FILES["file_input"]
-        data = preprocess_xlsx(file)
-        store_to_db(data)
-        UploadedFile.objects.create(file=file,uploader=self.request.user.username)
-        return self.form_valid(form)
-        
-    def form_valid(self, form):
-        return super().form_valid(form)
+        file = self.request.FILES["file"]
+        form = UploadForm(files=self.request.FILES)
+        if form.is_valid():
+            response = {'status': 'OK'}
+            xlsx = UploadedFile.objects.create(file=file,uploader=self.request.user.username)
+            xlsx_parse.delay(xlsx.id)
+        else:
+            response = {'status': 'fail'}
+        return JsonResponse(response)
+
+

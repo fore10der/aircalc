@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import signals
 from gss.settings.base import SOURCE_PATH
 
 class UploadedFile(models.Model):

@@ -25,8 +25,6 @@ SECRET_KEY = 'wqm&6u%7x&7a$z7b8v-h5p(5+cjf$@l02fn+u-jrkl+fn2ul*m'
 
 ALLOWED_HOSTS = ['*']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,6 +43,13 @@ INSTALLED_APPS = [
     'units',
     'aircarts'
 ]
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_ROUTES = {
+ 'loader.utils.*': {'queue': 'loads'},
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -147,6 +152,7 @@ WEBPACK_LOADER = {
         'STATS_FILE': os.path.join(STATICFILES_DIRS[0], 'webpack-stats.json')
     }
 }
+
 
 MEDIA_URL = '/media/'
 

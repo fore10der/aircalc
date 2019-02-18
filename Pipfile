@@ -14,9 +14,10 @@ djangorestframework = "*"
 psycopg2-binary = "*"
 gunicorn = "==19.9.0"
 django-webpack-loader = "*"
+celery = {extras = ["redis"],version = "*"}
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"
 
 [dev-packages]
 pytest = "*"

@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import FileExtensionValidator
 
-class TestFileForm(forms.Form):
-    file_input = forms.FileField(label="Выберите файл для загрузки в базу данных")
+class UploadForm(forms.Form):
+    file = forms.FileField(validators=[FileExtensionValidator(allowed_extensions=['xlsx'])])

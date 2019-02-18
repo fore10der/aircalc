@@ -1,9 +1,13 @@
 import numpy as np
 from matplotlib.dates import date2num, num2date
 from openpyxl import load_workbook
+from .models import UploadedFile
 from units.models import Unit, UnitCreator, UnitAction
 from aircarts.models import Aircart, AircartCompany, AircartFlightRecord
 from django.db.models import F, Sum
+from gss.celery import app
+from django.db import transaction
+
 
 #Извлекаем контент из xlsx
 def preprocess_xlsx(filename):
@@ -66,3 +70,9 @@ def store_to_db(data):
                     #Вставляем failtures/removals столько раз сколько было описано в excel
                     for _ in np.arange(event[1]):
                         UnitAction.objects.create(unit=obj[0], date=num2date(event[0]), action_type=mark)
+
+@app.task(queue='loads')
+def xlsx_parse(xlsx_id):
+    xlsx = UploadedFile.objects.get(id=xlsx_id)
+    data = preprocess_xlsx(xlsx.file)
+    store_to_db(data)
