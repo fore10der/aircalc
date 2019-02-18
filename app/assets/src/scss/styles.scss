@@ -2,7 +2,6 @@
 @import url(../../node_modules/slick-carousel/slick/slick.css);
 @import url(../../node_modules/bootstrap/dist/css/bootstrap.min.css);
 
-
 @font-face { 
   font-family: "Futura";
   font-style: normal;
@@ -33,3 +32,4 @@ a:hover {
 @import url(upload.scss);
 @import url(report.scss);
 @import url(block.scss);
+@import 'report.sass';
