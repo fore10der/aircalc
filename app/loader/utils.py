@@ -6,6 +6,7 @@ from units.models import Unit, UnitCreator, UnitAction
 from aircarts.models import Aircart, AircartCompany, AircartFlightRecord
 from django.db.models import F, Sum
 from gss.celery import app
+from django.db import transaction
 
 
 #Извлекаем контент из xlsx
@@ -70,7 +71,7 @@ def store_to_db(data):
                     for _ in np.arange(event[1]):
                         UnitAction.objects.create(unit=obj[0], date=num2date(event[0]), action_type=mark)
 
-@app.task
+@app.task(queue='loads')
 def xlsx_parse(xlsx_id):
     xlsx = UploadedFile.objects.get(id=xlsx_id)
     data = preprocess_xlsx(xlsx.file)

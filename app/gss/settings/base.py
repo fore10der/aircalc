@@ -25,12 +25,6 @@ SECRET_KEY = 'wqm&6u%7x&7a$z7b8v-h5p(5+cjf$@l02fn+u-jrkl+fn2ul*m'
 
 ALLOWED_HOSTS = ['*']
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = '6379'
-BROKER_URL = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600} 
-CELERY_RESULT_BACKEND = 'redis://' + REDIS_HOST + ':' + REDIS_PORT + '/0'
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -49,6 +43,13 @@ INSTALLED_APPS = [
     'units',
     'aircarts'
 ]
+
+CELERY_BROKER_URL = 'amqp://localhost'
+
+CELERY_ROUTES = {
+ 'loader.utils.*': {'queue': 'loads'},
+}
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
