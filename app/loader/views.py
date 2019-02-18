@@ -1,6 +1,7 @@
 from django.views.generic.edit import FormMixin
 from django.views.generic import ListView
 from .models import UploadedFile
+from .forms import UploadForm
 from .utils import xlsx_parse
 from django.http import JsonResponse
 from django.urls import reverse
@@ -13,8 +14,13 @@ class UploadFileView(ListView):
     
     def post(self, form):
         file = self.request.FILES["file"]
-        # xlsx = UploadedFile.objects.create(file=file,uploader=self.request.user.username)
-        # xlsx_parse.delay(xlsx.id)
-        return JsonResponse({'status': 'OK'})
+        form = UploadForm(files=self.request.FILES)
+        if form.is_valid():
+            response = {'status': 'OK'}
+            xlsx = UploadedFile.objects.create(file=file,uploader=self.request.user.username)
+            xlsx_parse.delay(xlsx.id)
+        else:
+            response = {'status': 'fail'}
+        return JsonResponse(response)
 
 
