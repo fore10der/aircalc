@@ -10,6 +10,12 @@
   margin-left: 200px;
 }
 
+.header .header_report_title {
+	border-bottom: 2px solid #d2d2fb;
+	padding-bottom: 27px;
+	border-radius: 1px;
+}
+
 .header a {
   color: rgba(142, 142, 245, 0.4);
   font-size: 19px;
@@ -37,13 +43,10 @@
 	margin-top: 30px;
 	margin-left: 157px;
 	height: 80px;
-	
+	-webkit-margin-before: 150px;
+
 }
 
-.reoprt_form_name hr {
-	border: 1px solid rgba(151, 151, 151, 0.1);
-	padding-bottom: 20px;
-}
 
 .report_form_name label{
 	margin-left: 20px;
@@ -70,12 +73,15 @@
 	padding-bottom: 15px;
 	margin-right: 140px;
 	height: 80px;
+	-webkit-margin-before: 150px;
+
 }
 .report_form_name hr {
 	margin-left: 20px;
 	margin-top: 10px;
 	margin-right: 10px;
 	border: 1px solid rgba(151, 151, 151, 0.1);
+	// padding-bottom: 20px;
 }
 .report_form_date hr {
 	margin-left: 20px;
@@ -97,7 +103,7 @@
 
 .report_form_date input{
 	margin-left: 19px;
-	width: 90px;
+	width: 95px;
 	font-size: 16px;
 	letter-spacing: -0.28px;
 	font-weight: 500;
@@ -118,7 +124,8 @@
 	margin-top: 142px;
 	color: #ffffff;
 	font-size: 16px;
-	font-weight: 700;
+font-weight: 500;
+	  border: 0;
 }
 
 .report_history_container .container{
@@ -194,6 +201,7 @@
 	font-size: 28px;
 	font-weight: 500;
 	letter-spacing: -0.28px;
+	padding-bottom: 24px;
 }
 
 .form-control {

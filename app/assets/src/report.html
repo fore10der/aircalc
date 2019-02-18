@@ -6,40 +6,39 @@
 	<link rel="stylesheet" href="styles.bundle.css" />
 </head>
 <header>
- <div class="header">
-    <a href="report.html">Upload</a>
-    <a class="central_link" href="report.html">Report</a>
-    <a href="#">Logout</a>
-</div> 
+    <div class="header">
+        <a href="report.html">Upload</a>
+        <a class="central_link" href="report.html">Report</a>
+        <a href="#">Logout</a>
+    </div>
 </header>
 <body>
-	<div class="report">
-	<div class="report_form_container">
-		<div class="container">
-		<form>   
-			<div class="form-row justify-content-center align-items-center">
-    <div class="form-group col-md-6">
-    	<div class="report_form_name">
-      <label for="report_form_name_title">Report name</label><br>
-      <input type="email" class="" id="report_form_name_title" placeholder="Report name">
-      <hr>
-      </div>
-    </div>
-    <div class="form-group col-md-6">
-    	<div class="report_form_date">
-      <label for="report_form_date_title">Create date</label><br>
-      <input type="password" class="" id="report_form_date_title" placeholder="dd.mm.aaaa">
-      <span>-</span>
-      <input type="password" class="" id="report_form_date_title" placeholder="dd.mm.aaaa">
-      <hr>
-    </div>
-    </div>
-  </div>
-		</form>
-		<button>Send report</button>
-		</div>
-	</div>
 
+<div class="container">
+    <div class="report-form">
+        <div class="row report-body">
+            <div class="report-group">
+                <label class="report-label">Report name</label>
+                <input class="report-input" placeholder="Report name">
+            </div>
+
+
+            <div class="report-group">
+                <label class="report-label">Report date</label>
+                <div class="report-between" >
+                    <input class="report-input report-input_half" placeholder="dd.mm.aaaa">
+
+                    -
+                    <input class="report-input report-input_half" placeholder="dd.mm.aaaa">
+
+                </div>
+            </div>
+            <div class="col-md-12 report-footer">
+                <button class="button button-primary">Send report</button>
+            </div>
+        </div>
+    </div>
+</div>
     <div class="report_history_container">    
       <div class="container report_slider">
   	   <p class="report_history_main_title">Report history</p>
@@ -126,10 +125,6 @@
 </div>
 </div>
 </div>
-
-
-</div>		
-	</div>
 </body>
 </html>
 

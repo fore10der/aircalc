@@ -2,17 +2,16 @@
 @import url(../../node_modules/slick-carousel/slick/slick.css);
 @import url(../../node_modules/bootstrap/dist/css/bootstrap.min.css);
 
-
 @font-face { 
-  font-family: "Roboto";
+  font-family: "Futura";
   font-style: normal;
   font-weight: 400;
-  src: url(../fonts/Roboto-Regular.ttf);
+  src: url(fonts/Futura.ttf);
 }
 
 body {
 	background: #f1ebfb; 
-	font-family: "Roboto";
+	font-family: "Futura";
 }
 
 a:hover {
@@ -33,3 +32,4 @@ a:hover {
 @import url(upload.scss);
 @import url(report.scss);
 @import url(block.scss);
+@import 'report.sass';
