@@ -218,3 +218,35 @@
 	display: block;
 	color: #cbcbcb;
 }
+
+.upload_place_container_stage_2 .upload-message__stage_fail {
+	display: none;
+}
+
+.upload_place_container_stage_2 .upload-message__stage_success {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_init {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_success {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_fail {
+	display: block;
+}
+
+.upload-success .upload-message__stage_init {
+	display: none;
+}
+
+.upload-success .upload-message__stage_success {
+	display: block;
+}
+
+.upload-success .upload-message__stage_fail {
+	display: none;
+}
