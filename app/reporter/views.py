@@ -4,6 +4,7 @@ from .models import ReportedFile
 from .forms import ReportedForm
 from gss.utils import group_required
 from .utils import build_report, get_data, build_plots, get_date_bounds
+from celery.task.control import inspect
 
 class ReportFileView(FormMixin,ListView):
     queryset = ReportedFile.objects.order_by('-generate_date')
