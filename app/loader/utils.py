@@ -71,7 +71,7 @@ def store_to_db(data):
                     for _ in np.arange(event[1]):
                         UnitAction.objects.create(unit=obj[0], date=num2date(event[0]), action_type=mark)
 
-@app.task(queue='loads')
+@app.task(queue='loads', retries=5)
 def xlsx_parse(xlsx_id):
     xlsx = UploadedFile.objects.get(id=xlsx_id)
     data = preprocess_xlsx(xlsx.file)
