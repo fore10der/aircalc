@@ -20,6 +20,9 @@ RUN pip install pipenv
 COPY ./Pipfile ./
 COPY ./docker/django/entrypoint.sh ./
 RUN chmod +x entrypoint.sh
+RUN mkdir -p media/sources
+RUN mkdir -p media/reports
+RUN chmod 777 -R media
 RUN pipenv install --skip-lock --system --dev
 
 # copy project
