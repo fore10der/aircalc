@@ -12,6 +12,11 @@ class ReportFileView(FormMixin,ListView):
     model = ReportedFile
     form_class = ReportedForm
 
+    def get_context_data(self, **kwargs):
+        context = super(ReportFileView, self).get_context_data(**kwargs)
+        context['is_ready'] = not bool(inspect().active()['celery@uploads'])
+        return context
+
     def post(self, form):
         companies_stats, units_stats, dates = get_data(self.request.POST["report_date_start"],self.request.POST["report_date_end"])
         unit_plots = build_plots(units_stats,dates)
