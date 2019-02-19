@@ -17,12 +17,10 @@ $(document).ready(()=>{
               if (response.status == 'OK'){
                 if (dropzoneSelector.classList.contains('upload-fail'))
                   dropzoneSelector.classList.remove('upload-fail');
-                document.querySelector(`${dropzoneId} button span`).innerHTML = 'Load another one'
                 dropzoneSelector.classList.add('upload-success');
+                this.disable()
               }
               else {
-                if (dropzoneSelector.classList.contains('upload-success'))
-                  dropzoneSelector.classList.remove('upload-success');
                 document.querySelector(`${dropzoneId} button span`).innerHTML = 'Try to load another'
                 dropzoneSelector.classList.add('upload-fail');
               }

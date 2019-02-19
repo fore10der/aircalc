@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 {% load filename %}
+{% block title %}Report{% endblock %}
 {% block content %}
-	<form method="POST" class="report_form">
+{% if is_ready %}
+  	<form method="POST" class="report_form">
 	{% csrf_token %}
   <div class="container">
     <div class="report-form">
@@ -24,6 +26,15 @@
         </div>
     </div>
 </div>
+{% else %}
+<div class="upload_container">
+      <div class="container">
+      <div class="upload_place_container_stage_2 upload-waiting">
+          <div class="upload_place_container_message_2"><p>The database locked for upload file</p></div>
+      </div>
+      </div>
+</div>
+{% endif %}
   
 <div class="report_history_container">    
       <div class="container">

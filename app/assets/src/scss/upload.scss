@@ -219,6 +219,13 @@
 	color: #cbcbcb;
 }
 
+.upload-success {
+	background-image: url(ok.png);
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
 .upload_place_container_stage_2 .upload-message__stage_fail {
 	display: none;
 }
@@ -247,6 +254,17 @@
 	display: block;
 }
 
+.upload-success button {
+	display: none;
+}
+
 .upload-success .upload-message__stage_fail {
 	display: none;
+}
+
+.upload-waiting {
+	background-image: url(waiting.png);
+	justify-content: center;
+	align-items: flex-end;
+	display: flex;
 }
