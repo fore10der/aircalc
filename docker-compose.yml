@@ -19,7 +19,7 @@ services:
     volumes:
       - assets_volume:/usr/src/app/assets/dist
       - static_volume:/usr/src/app/static
-    command: celery -A gss worker -l debug -Q loads
+    command: celery -A gss worker -l debug -Q loads -n uploads
     depends_on:
       - db
       - redis
