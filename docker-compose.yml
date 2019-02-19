@@ -8,6 +8,22 @@ services:
     command: npm run prod
     volumes:
       - assets_volume:/usr/src/app/assets/dist
+
+  redis:
+    image: "redis:alpine"
+
+  celery:
+    build:
+      context: ./
+      dockerfile: ./docker/django/Dockerfile
+    volumes:
+      - assets_volume:/usr/src/app/assets/dist
+      - static_volume:/usr/src/app/static
+    command: celery -A gss worker -l debug -Q loads
+    depends_on:
+      - db
+      - redis
+
   web:
     build:
       context: ./
@@ -22,8 +38,10 @@ services:
     depends_on:
       - db
       - webpack
+
   db:
     image: postgres:11.1-alpine
+
   nginx:
     build: 
       context: ./
@@ -36,6 +54,7 @@ services:
       - 8000:80
     depends_on:
       - web
+
 volumes:
   assets_volume:
   static_volume:

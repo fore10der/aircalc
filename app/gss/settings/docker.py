@@ -2,6 +2,9 @@ from .base import *
 
 DEBUG = False
 
+BROKER_URL = 'redis://redis:6379'
+RESULT_BACKEND = 'redis://redis:6379'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

@@ -2,7 +2,6 @@ from django.views.generic.edit import FormMixin
 from django.views.generic import ListView
 from .models import UploadedFile
 from .forms import UploadForm
-from .utils import xlsx_parse
 from django.http import JsonResponse
 from django.urls import reverse
 from django.db.transaction import on_commit
@@ -18,7 +17,6 @@ class UploadFileView(ListView):
         if form.is_valid():
             response = {'status': 'OK'}
             xlsx = UploadedFile.objects.create(file=file,uploader=self.request.user.username)
-            xlsx_parse.delay(xlsx.id)
         else:
             response = {'status': 'fail'}
         return JsonResponse(response)

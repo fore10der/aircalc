@@ -44,12 +44,6 @@ INSTALLED_APPS = [
     'aircarts'
 ]
 
-CELERY_BROKER_URL = 'amqp://localhost'
-
-CELERY_ROUTES = {
- 'loader.utils.*': {'queue': 'loads'},
-}
-
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -161,3 +155,7 @@ REPORT_PATH = 'reports/'
 SOURCE_PATH = 'sources/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CELERY_ROUTES = {
+ 'loader.utils.*': {'queue': 'loads'},
+}

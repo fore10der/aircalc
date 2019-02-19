@@ -4,6 +4,9 @@ from .base import *
 
 PAGE_CACHE_SECONDS = 1
 
+BROKER_URL = 'redis://localhost:6379'
+RESULT_BACKEND = 'redis://localhost:6379'
+
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
