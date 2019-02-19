@@ -84,6 +84,7 @@
 	border-radius: 16px;
 	top: 45px;
 	left: 57px;
+
 }
 
 .upload_place_container_stage_2 button{
@@ -103,8 +104,7 @@
 }
 
 .upload_place_container_stage_2 .upload_place_container_message_1 {
-	visibility: hidden;
-	margin-top: -40px;
+	display: none;
 }
 
 .upload_place_container_stage_2 .upload_place_container_message_2 p {
@@ -199,7 +199,54 @@
 	color: #e0c1ff;
 }
 
-#fileupload {
-	height: 100%;
-	width: 100%;
+#fileupload.dz-drag-hover  {
+	background-image: url(Clip_2.png);
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+#fileupload.dz-drag-hover button  {
+	display: none;
+}
+
+#fileupload.dz-drag-hover .upload_place_container_message_2 p {
+	display: none;
+}
+
+#fileupload.dz-drag-hover .upload_place_container_message_1 {
+	display: block;
+	color: #cbcbcb;
+}
+
+.upload_place_container_stage_2 .upload-message__stage_fail {
+	display: none;
+}
+
+.upload_place_container_stage_2 .upload-message__stage_success {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_init {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_success {
+	display: none;
+}
+
+.upload-fail .upload-message__stage_fail {
+	display: block;
+}
+
+.upload-success .upload-message__stage_init {
+	display: none;
+}
+
+.upload-success .upload-message__stage_success {
+	display: block;
+}
+
+.upload-success .upload-message__stage_fail {
+	display: none;
 }

@@ -3,33 +3,27 @@
 {% block content %}
 	<form method="POST" class="report_form">
 	{% csrf_token %}
-	
-	<div class="report">
-	<div class="report_form_container">
-		<div class="container">
-		<form>   
-			<div class="form-row justify-content-center align-items-center">
-    <div class="form-group col-md-4">
-    	<div class="report_form_name">
-      <label for="report_form_name_title">Report name</label><br>
-      {{form.report_name}}
-      <hr>
-      </div>
+  <div class="container">
+    <div class="report-form">
+        <div class="row report-body">
+            <div class="report-group">
+                <label class="report-label" for="{{form.report_name.name}}">Report name</label>
+                {{form.report_name}}
+            </div>
+            <div class="report-group">
+                <label class="report-label">Report date</label>
+                <div class="report-between" >
+                    {{form.report_date_start}}
+                    -
+                    {{form.report_date_end}}
+                </div>
+            </div>
+            <div class="col-md-12 report-footer">
+                <button class="button button-primary">Send report</button>
+            </div>
+        </div>
     </div>
-    <div class="form-group col-md-6">
-    	<div class="report_form_date">
-      <label for="report_form_date_title">Create date</label><br>
-      {{form.report_date_start}}
-				<span>-</span>
-			{{form.report_date_end}}
-      <hr>
-    </div>
-    </div>
-  </div>
-		</form>
-		<button>Send report</button>
-		</div>
-	</div>
+</div>
   
 <div class="report_history_container">    
       <div class="container">
