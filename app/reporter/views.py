@@ -15,7 +15,7 @@ class ReportFileView(FormMixin,ListView):
 
     def get_context_data(self, **kwargs):
         context = super(ReportFileView, self).get_context_data(**kwargs)
-        context['is_ready'] = not bool(inspect().active()['celery@uploads'])
+        context['is_ready'] = True # not bool(inspect().active()['celery@uploads'])
         return context
 
     def post(self, form):

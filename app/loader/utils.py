@@ -35,6 +35,7 @@ def preprocess_xlsx(filename):
     return main
 
 #Сохраняем статистику из словаря в бд
+@transaction.atomic
 def store_to_db(data):
     #Идем по "Листам"
     for leaf_name, leaf_content in data.items():

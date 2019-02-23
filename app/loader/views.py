@@ -16,7 +16,7 @@ class UploadFileView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super(UploadFileView, self).get_context_data(**kwargs)
-        context['is_ready'] = not bool(inspect().active()['celery@uploads'])
+        context['is_ready'] = True # not bool(inspect().active()['celery@uploads'])
         return context
     
     def post(self, form):
@@ -29,6 +29,9 @@ class UploadFileView(ListView):
             on_commit(lambda: xlsx_parse.delay(xlsx.id))
         else:
             response = {'status': 'fail'}
+        print(inspect().active())
+        print(inspect().reserved())
+        print(inspect().scheduled())
         return JsonResponse(response)
 
 

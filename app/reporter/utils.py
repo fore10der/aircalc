@@ -15,12 +15,14 @@ from xhtml2pdf import pisa
 from gss.settings.base import MEDIA_ROOT
 from .models import ReportedFile
 from django.core.files.base import ContentFile
+from django.db import transaction
 import os
 
 def fetch_resources(uri,rel):
     return os.path.join(MEDIA_ROOT, uri)
 
 #Функция принимает начальные и конечные даты для составления отчета, id компаний и "окно" для под
+@transaction.atomic
 def get_data(start_date_str, end_date_str, window_value = 3, companies_ids=None):
     start_date = datetime.datetime.strptime(start_date_str,'%Y-%m-%d')
     end_date = datetime.datetime.strptime(end_date_str,'%Y-%m-%d')
