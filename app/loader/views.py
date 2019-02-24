@@ -26,12 +26,9 @@ class UploadFileView(ListView):
         if form.is_valid():
             response = {'status': 'OK'}
             xlsx = UploadedFile.objects.create(file=file,uploader=uploader_name)
-            on_commit(lambda: xlsx_parse.delay(xlsx.id))
+            on_commit(lambda: xlsx_parse.delay(xlsx.id,self.request.user.id))
         else:
             response = {'status': 'fail'}
-        print(inspect().active())
-        print(inspect().reserved())
-        print(inspect().scheduled())
         return JsonResponse(response)
 
 

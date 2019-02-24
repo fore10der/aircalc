@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
 from gss.settings.base import LOGIN_REDIRECT_URL
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
 
 def group_required(*group_names):
    """Requires user membership in at least one of the groups passed in."""
@@ -23,3 +25,11 @@ def anonymous_required(function=None, redirect_url=None):
     if function:
         return actual_decorator(function)
     return actual_decorator
+
+def notificate(user_id, type, info):
+    print('dev')
+    layer = get_channel_layer()
+    async_to_sync(layer.group_send)(f'group-{user_id}', {
+        'type': type,
+        'content': info
+    })

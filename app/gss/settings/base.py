@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'webpack_loader',
+    'channels',
     'gss',
     'api',
     'loader',
@@ -93,6 +94,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'gss.wsgi.application'
+
+ASGI_APPLICATION = 'gss.routing.application'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -158,4 +161,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CELERY_ROUTES = {
  'loader.utils.*': {'queue': 'loads'},
+}
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+    },
 }

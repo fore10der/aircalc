@@ -7,7 +7,8 @@ from aircarts.models import Aircart, AircartCompany, AircartFlightRecord
 from django.db.models import F, Sum
 from gss.celery import app
 from django.db import transaction
-
+from gss.utils import notificate
+import os
 
 #Извлекаем контент из xlsx
 def preprocess_xlsx(filename):
@@ -73,7 +74,10 @@ def store_to_db(data):
                         UnitAction.objects.create(unit=obj[0], date=num2date(event[0]), action_type=mark)
 
 @app.task(queue='loads', retries=5)
-def xlsx_parse(xlsx_id):
+def xlsx_parse(xlsx_id,user_id):
+    print('foo')
     xlsx = UploadedFile.objects.get(id=xlsx_id)
     data = preprocess_xlsx(xlsx.file)
     store_to_db(data)
+    xlsx_name = os.path.basename(xlsx.file.name)
+    notificate(user_id, 'load.success', xlsx_name)
