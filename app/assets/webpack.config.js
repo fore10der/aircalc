@@ -55,19 +55,18 @@ module.exports = {
             options: {
               ident: "postcss",
               sourceMap: true,
-              plugins: () => []
-              // plugins: () => [
-              //   require("cssnano")({
-              //     preset: [
-              //       "default",
-              //       {
-              //         discardComments: {
-              //           removeAll: true
-              //         }
-              //       }
-              //     ]
-              //   })
-              // ]
+              plugins: () => [
+                require("cssnano")({
+                  preset: [
+                    "default",
+                    {
+                      discardComments: {
+                        removeAll: true
+                      }
+                    }
+                  ]
+                })
+              ]
             }
           },
           {
@@ -127,7 +126,7 @@ module.exports = {
       },
     ]),
         new HtmlWebPackPlugin({
-            template: "./src/upload.html",
+            template: "./src/report.html",
         filename: "./index.html"
         })
     ]

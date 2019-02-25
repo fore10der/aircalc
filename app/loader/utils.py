@@ -75,7 +75,6 @@ def store_to_db(data):
 
 @app.task(queue='loads', retries=5)
 def xlsx_parse(xlsx_id,user_id):
-    print('foo')
     xlsx = UploadedFile.objects.get(id=xlsx_id)
     data = preprocess_xlsx(xlsx.file)
     store_to_db(data)

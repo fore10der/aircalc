@@ -18,6 +18,12 @@ $(document).ready(()=>{
                 text: `File ${message.content} was loaded successfully`
             }).show();
             break;
+        case 'report.success':
+            new Noty({
+                text: `Report ${message.content.filename} was successfully created. <br> You can download it by <a target="_blank" rel="noopener noreferrer" style="color:white;text-decoration:underline;" href="${message.content.download_link}">this link</a>`,
+                timeout: false
+            }).show();
+            break;
         default:
             break;
     }

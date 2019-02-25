@@ -27,7 +27,6 @@ def anonymous_required(function=None, redirect_url=None):
     return actual_decorator
 
 def notificate(user_id, type, info):
-    print('dev')
     layer = get_channel_layer()
     async_to_sync(layer.group_send)(f'group-{user_id}', {
         'type': type,

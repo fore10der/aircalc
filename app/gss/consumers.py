@@ -27,10 +27,9 @@ class NotificationConsumer(JsonWebsocketConsumer):
         )
     
     def report_success(self, event):
-        print('report')
         self.send_json(
             {
                 'type': 'report.success',
-                'status': event['status']
+                'content': event['content']
             }
         )

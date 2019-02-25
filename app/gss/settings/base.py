@@ -150,6 +150,10 @@ WEBPACK_LOADER = {
     }
 }
 
+LOGIN_EXEMPT_URLS = [
+    '/static/'
+]
+
 
 MEDIA_URL = '/media/'
 
@@ -161,6 +165,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CELERY_ROUTES = {
  'loader.utils.*': {'queue': 'loads'},
+ 'reporter.utils.*': {'queue': 'reports'},
 }
 
 CHANNEL_LAYERS = {

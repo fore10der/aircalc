@@ -13,7 +13,7 @@
 
 body {
 	background: #f1ebfb; 
-	font-family: "Futura";
+  font-family: "Futura";
 }
 
 a:hover {
@@ -30,6 +30,7 @@ a:hover {
   margin-left: 14px;
 }
 
+@import url(spinner.css);
 @import url(login.scss);
 @import url(upload.scss);
 @import url(report.scss);
