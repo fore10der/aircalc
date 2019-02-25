@@ -2,9 +2,18 @@
 {% block title %}Upload{% endblock %}
 {% load filename %}
 {% block content %}
+{% if success %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  Файл был загружен успешно
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
 	<div class="upload">
     <div class="upload_container">
       <div class="container">
+      {% if is_ready %}
           <form action="" id="fileupload" class="upload_place_container_stage_2" class="upload_place_container_stage_1">
             {% csrf_token %}
             <button><span>Send file</span></button>
@@ -13,6 +22,11 @@
             <div class="upload_place_container_message_2 upload-message__stage_fail"><p>Oops... file have wrong type and couldn't be loaded</p></div>
             <div class="upload_place_container_message_2 upload-message__stage_success"><p>The file was successfully verified and it will be loaded soon</p></div>
           </div>
+      {% else %}
+        <div class="upload_place_container_stage_2 upload-waiting">
+          <div class="upload_place_container_message_2"><p>The database locked for upload file</p></div>
+        </div>
+      {% endif %}
   </div>
   </div>
   </div>

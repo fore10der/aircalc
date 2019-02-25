@@ -20,7 +20,7 @@ services:
       - assets_volume:/usr/src/app/assets/dist
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
-    command: celery -A gss worker -l info -Q loads,reports
+    command: celery -A gss worker -l debug -Q loads -n uploads
     depends_on:
       - db
       - redis
@@ -33,7 +33,7 @@ services:
       - assets_volume:/usr/src/app/assets/dist
       - static_volume:/usr/src/app/static
       - media_volume:/usr/src/app/media
-    command: daphne gss.asgi:application --bind 0.0.0.0 -t 9000
+    command: gunicorn gss.wsgi:application --bind 0.0.0.0:8000 -t 9000
     expose: 
       - 8000
     depends_on:

@@ -1,8 +1,6 @@
 import $ from 'jquery';
 import 'slick-carousel';
 import './fileupload.js';
-import './notification.js';
-import './report.js';
 
   let $status = $('.pager .pagenum')
   let $uploadSlider = $('.upload_slider')
