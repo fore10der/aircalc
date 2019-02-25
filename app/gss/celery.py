@@ -1,7 +1,7 @@
 from celery import Celery
 import os
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gss.settings.docker_dev')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'gss.settings.docker')
 
 app = Celery('gss')
 app.config_from_object('django.conf:settings')

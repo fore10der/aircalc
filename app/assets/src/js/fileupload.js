@@ -13,12 +13,11 @@ $(document).ready(()=>{
         clickable: document.querySelector(`${dropzoneId} button`),
         init: function () {
             this.on("success", function (file, response) {
-              console.log(response.status)
               if (response.status == 'OK'){
                 if (dropzoneSelector.classList.contains('upload-fail'))
                   dropzoneSelector.classList.remove('upload-fail');
                 dropzoneSelector.classList.add('upload-success');
-                this.disable()
+                document.querySelector(`${dropzoneId} button span`).innerHTML = 'Load another one'
               }
               else {
                 document.querySelector(`${dropzoneId} button span`).innerHTML = 'Try to load another'
