@@ -13,11 +13,6 @@ class UploadFileView(ListView):
     queryset = UploadedFile.objects.order_by('-upload_date')
     template_name = 'upload.html'
     context_object_name = 'uploads'
-
-    def get_context_data(self, **kwargs):
-        context = super(UploadFileView, self).get_context_data(**kwargs)
-        context['is_ready'] = True # not bool(inspect().active()['celery@uploads'])
-        return context
     
     def post(self, form):
         uploader_name = self.request.user.username
@@ -26,12 +21,9 @@ class UploadFileView(ListView):
         if form.is_valid():
             response = {'status': 'OK'}
             xlsx = UploadedFile.objects.create(file=file,uploader=uploader_name)
-            on_commit(lambda: xlsx_parse.delay(xlsx.id))
+            on_commit(lambda: xlsx_parse.delay(xlsx.id,self.request.user.id))
         else:
             response = {'status': 'fail'}
-        print(inspect().active())
-        print(inspect().reserved())
-        print(inspect().scheduled())
         return JsonResponse(response)
 
 

@@ -204,6 +204,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
+	flex-direction: row
 }
 
 #fileupload.dz-drag-hover button  {
@@ -222,8 +223,7 @@
 .upload-success {
 	background-image: url(ok.png);
 	display: flex;
-	justify-content: center;
-	align-items: flex-end;
+	flex-direction: column
 }
 
 .upload_place_container_stage_2 .upload-message__stage_fail {
@@ -252,10 +252,6 @@
 
 .upload-success .upload-message__stage_success {
 	display: block;
-}
-
-.upload-success button {
-	display: none;
 }
 
 .upload-success .upload-message__stage_fail {
