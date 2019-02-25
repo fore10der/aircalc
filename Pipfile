@@ -17,6 +17,7 @@ django-webpack-loader = "*"
 celery = {extras = ["redis"],version = "*"}
 channels = "*"
 channels-redis = "*"
+daphne = "*"
 
 [requires]
 python_version = "3.6"
