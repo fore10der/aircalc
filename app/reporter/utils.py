@@ -16,7 +16,9 @@ from gss.settings.base import MEDIA_ROOT
 from .models import ReportedFile
 from django.core.files.base import ContentFile
 from django.db import transaction
+from gss.celery import app
 import os
+from gss.utils import notificate
 
 def fetch_resources(uri,rel):
     return os.path.join(MEDIA_ROOT, uri)
@@ -115,19 +117,14 @@ def build_report(context,docinfo):
     pisaStatus = pisa.CreatePDF(
        html, dest=result, link_callback=fetch_resources)
     if pisaStatus.err:
-       return HttpResponse('We had some errors <pre>' + html + '</pre>')
-    response = HttpResponse(result.getvalue())
-    response['Content-Type'] = 'application/pdf'
-    response['Content-Disposition'] = 'attachment; filename="%s.pdf"'%(docinfo["filename"])
+       return
 
     pdf_to_save = ContentFile(result.getvalue())
     pdf_to_save.name = "%s.pdf"%(docinfo["filename"])
-    ReportedFile.objects.create(file=pdf_to_save, \
+    return ReportedFile.objects.create(file=pdf_to_save, \
         reporter=docinfo["creator"], \
         report_date_start=docinfo["report_date_start"], \
         report_date_end=docinfo["report_date_end"])
-
-    return response
 
 #Функция для форматирования даты для отображения в pdf (см заголовок левой таблицы)
 def get_date_bounds(dates):
@@ -136,3 +133,22 @@ def get_date_bounds(dates):
         "end": dates[-1].strftime("%B %Y"),
         "interval": len(dates)
     }
+
+@app.task(queue='reports', retries=5)
+def create_pdf(report_name, date_start, date_end, creator_name, creator_id):
+    companies_stats, units_stats, dates = get_data(date_start,date_end)
+    unit_plots = build_plots(units_stats,dates)
+    date_bounds = get_date_bounds(dates)
+    report = build_report({"companies_stats": companies_stats,
+    "units_stats": unit_plots,
+    "report_bounds": date_bounds},
+    {
+        "filename": report_name,
+        "report_date_start": date_start,
+        "report_date_end": date_end,
+        "creator": creator_name
+    })
+    notificate(creator_id,'report.success',{
+        'download_link': report.file.url,
+        'filename': os.path.basename(report.file.name)
+    })
