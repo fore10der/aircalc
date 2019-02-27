@@ -10,20 +10,6 @@ services:
       - assets_volume:/usr/src/app/assets/dist
   redis:
     image: "redis:alpine"
-
-  celery:
-    build:
-      context: ./
-      dockerfile: ./docker/django/Dockerfile
-    volumes:
-      - assets_volume:/usr/src/app/assets/dist
-      - static_volume:/usr/src/app/static
-      - media_volume:/usr/src/app/media
-    command: celery -A gss worker -l info -Q loads,reports
-    depends_on:
-      - db
-      - redis
-
   web:
     build:
       context: ./
@@ -38,7 +24,20 @@ services:
     depends_on:
       - db
       - webpack
-
+  celery:
+    build:
+      context: ./
+      dockerfile: ./docker/django/Dockerfile
+    volumes:
+      - assets_volume:/usr/src/app/assets/dist
+      - static_volume:/usr/src/app/static
+      - media_volume:/usr/src/app/media
+    command: celery -A gss worker -l info -Q loads,reports
+    depends_on:
+      - db
+      - redis
+      - webpack
+      - web
   db:
     image: postgres:11.1-alpine
 
