@@ -13,7 +13,7 @@ module.exports = {
         "./src/js/index.js", "./src/scss/styles.scss" 
     ],
     output : {
-        filename : '[name].[hash].js',
+        filename : '[name].[chunkhash].js',
         path : path.resolve(__dirname, 'dist')
     },
     module: {

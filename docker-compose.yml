@@ -8,7 +8,6 @@ services:
     command: npm run prod
     volumes:
       - assets_volume:/usr/src/app/assets/dist
-
   redis:
     image: "redis:alpine"
 
