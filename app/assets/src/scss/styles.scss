@@ -34,6 +34,18 @@ a:hover {
   margin-left: 14px;
 }
 
+:invalid {
+  box-shadow: none;
+}
+
+:-moz-submit-invalid {
+  box-shadow: none;
+}
+
+:-moz-ui-invalid {
+  box-shadow:none;
+}
+
 @import url(spinner.css);
 @import url(login.scss);
 @import url(upload.scss);
